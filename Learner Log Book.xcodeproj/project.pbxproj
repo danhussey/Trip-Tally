@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A217E47DFA0055A908 /* UIKit.framework */; };
+		488E68A517E47DFA0055A908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A417E47DFA0055A908 /* Foundation.framework */; };
+		488E68A717E47DFA0055A908 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A617E47DFA0055A908 /* CoreGraphics.framework */; };
+		488E68AD17E47DFA0055A908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 488E68AB17E47DFA0055A908 /* InfoPlist.strings */; };
+		488E68AF17E47DFA0055A908 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68AE17E47DFA0055A908 /* main.m */; };
+		488E68B317E47DFA0055A908 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68B217E47DFA0055A908 /* AppDelegate.m */; };
+		488E68B517E47DFA0055A908 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 488E68B417E47DFA0055A908 /* Default.png */; };
+		488E68B717E47DFA0055A908 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 488E68B617E47DFA0055A908 /* Default@2x.png */; };
+		488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 488E68B817E47DFA0055A908 /* Default-568h@2x.png */; };
+		488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */; };
+		488E68BF17E47DFA0055A908 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */; };
+		488E68C217E47DFA0055A908 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68C117E47DFA0055A908 /* ViewController.m */; };
+		488E68CA17E47DFA0055A908 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68C917E47DFA0055A908 /* SenTestingKit.framework */; };
+		488E68CB17E47DFA0055A908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A217E47DFA0055A908 /* UIKit.framework */; };
+		488E68CC17E47DFA0055A908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A417E47DFA0055A908 /* Foundation.framework */; };
+		488E68D417E47DFA0055A908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 488E68D217E47DFA0055A908 /* InfoPlist.strings */; };
+		488E68D717E47DFA0055A908 /* Learner_Log_BookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		488E68CD17E47DFA0055A908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 488E689717E47DFA0055A908 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 488E689E17E47DFA0055A908;
+			remoteInfo = "Learner Log Book";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		488E689F17E47DFA0055A908 /* Learner Log Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learner Log Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		488E68A217E47DFA0055A908 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		488E68A417E47DFA0055A908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		488E68A617E47DFA0055A908 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		488E68AA17E47DFA0055A908 /* Learner Log Book-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Learner Log Book-Info.plist"; sourceTree = "<group>"; };
+		488E68AC17E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		488E68AE17E47DFA0055A908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		488E68B017E47DFA0055A908 /* Learner Log Book-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Learner Log Book-Prefix.pch"; sourceTree = "<group>"; };
+		488E68B117E47DFA0055A908 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		488E68B217E47DFA0055A908 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		488E68B417E47DFA0055A908 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		488E68B617E47DFA0055A908 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		488E68B817E47DFA0055A908 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		488E68BB17E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		488E68BE17E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		488E68C017E47DFA0055A908 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		488E68C117E47DFA0055A908 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		488E68C817E47DFA0055A908 /* Learner Log BookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Learner Log BookTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		488E68C917E47DFA0055A908 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		488E68D117E47DFA0055A908 /* Learner Log BookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Learner Log BookTests-Info.plist"; sourceTree = "<group>"; };
+		488E68D317E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		488E68D517E47DFA0055A908 /* Learner_Log_BookTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Learner_Log_BookTests.h; sourceTree = "<group>"; };
+		488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Learner_Log_BookTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		488E689C17E47DFA0055A908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */,
+				488E68A517E47DFA0055A908 /* Foundation.framework in Frameworks */,
+				488E68A717E47DFA0055A908 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488E68C417E47DFA0055A908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68CA17E47DFA0055A908 /* SenTestingKit.framework in Frameworks */,
+				488E68CB17E47DFA0055A908 /* UIKit.framework in Frameworks */,
+				488E68CC17E47DFA0055A908 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		488E689617E47DFA0055A908 = {
+			isa = PBXGroup;
+			children = (
+				488E68A817E47DFA0055A908 /* Learner Log Book */,
+				488E68CF17E47DFA0055A908 /* Learner Log BookTests */,
+				488E68A117E47DFA0055A908 /* Frameworks */,
+				488E68A017E47DFA0055A908 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		488E68A017E47DFA0055A908 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				488E689F17E47DFA0055A908 /* Learner Log Book.app */,
+				488E68C817E47DFA0055A908 /* Learner Log BookTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		488E68A117E47DFA0055A908 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				488E68A217E47DFA0055A908 /* UIKit.framework */,
+				488E68A417E47DFA0055A908 /* Foundation.framework */,
+				488E68A617E47DFA0055A908 /* CoreGraphics.framework */,
+				488E68C917E47DFA0055A908 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		488E68A817E47DFA0055A908 /* Learner Log Book */ = {
+			isa = PBXGroup;
+			children = (
+				488E68B117E47DFA0055A908 /* AppDelegate.h */,
+				488E68B217E47DFA0055A908 /* AppDelegate.m */,
+				488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */,
+				488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */,
+				488E68C017E47DFA0055A908 /* ViewController.h */,
+				488E68C117E47DFA0055A908 /* ViewController.m */,
+				488E68A917E47DFA0055A908 /* Supporting Files */,
+			);
+			path = "Learner Log Book";
+			sourceTree = "<group>";
+		};
+		488E68A917E47DFA0055A908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				488E68AA17E47DFA0055A908 /* Learner Log Book-Info.plist */,
+				488E68AB17E47DFA0055A908 /* InfoPlist.strings */,
+				488E68AE17E47DFA0055A908 /* main.m */,
+				488E68B017E47DFA0055A908 /* Learner Log Book-Prefix.pch */,
+				488E68B417E47DFA0055A908 /* Default.png */,
+				488E68B617E47DFA0055A908 /* Default@2x.png */,
+				488E68B817E47DFA0055A908 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		488E68CF17E47DFA0055A908 /* Learner Log BookTests */ = {
+			isa = PBXGroup;
+			children = (
+				488E68D517E47DFA0055A908 /* Learner_Log_BookTests.h */,
+				488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */,
+				488E68D017E47DFA0055A908 /* Supporting Files */,
+			);
+			path = "Learner Log BookTests";
+			sourceTree = "<group>";
+		};
+		488E68D017E47DFA0055A908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				488E68D117E47DFA0055A908 /* Learner Log BookTests-Info.plist */,
+				488E68D217E47DFA0055A908 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		488E689E17E47DFA0055A908 /* Learner Log Book */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 488E68DA17E47DFA0055A908 /* Build configuration list for PBXNativeTarget "Learner Log Book" */;
+			buildPhases = (
+				488E689B17E47DFA0055A908 /* Sources */,
+				488E689C17E47DFA0055A908 /* Frameworks */,
+				488E689D17E47DFA0055A908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Learner Log Book";
+			productName = "Learner Log Book";
+			productReference = 488E689F17E47DFA0055A908 /* Learner Log Book.app */;
+			productType = "com.apple.product-type.application";
+		};
+		488E68C717E47DFA0055A908 /* Learner Log BookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 488E68DD17E47DFA0055A908 /* Build configuration list for PBXNativeTarget "Learner Log BookTests" */;
+			buildPhases = (
+				488E68C317E47DFA0055A908 /* Sources */,
+				488E68C417E47DFA0055A908 /* Frameworks */,
+				488E68C517E47DFA0055A908 /* Resources */,
+				488E68C617E47DFA0055A908 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				488E68CE17E47DFA0055A908 /* PBXTargetDependency */,
+			);
+			name = "Learner Log BookTests";
+			productName = "Learner Log BookTests";
+			productReference = 488E68C817E47DFA0055A908 /* Learner Log BookTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		488E689717E47DFA0055A908 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Daniel Hussey";
+			};
+			buildConfigurationList = 488E689A17E47DFA0055A908 /* Build configuration list for PBXProject "Learner Log Book" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 488E689617E47DFA0055A908;
+			productRefGroup = 488E68A017E47DFA0055A908 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				488E689E17E47DFA0055A908 /* Learner Log Book */,
+				488E68C717E47DFA0055A908 /* Learner Log BookTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		488E689D17E47DFA0055A908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68AD17E47DFA0055A908 /* InfoPlist.strings in Resources */,
+				488E68B517E47DFA0055A908 /* Default.png in Resources */,
+				488E68B717E47DFA0055A908 /* Default@2x.png in Resources */,
+				488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */,
+				488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */,
+				488E68BF17E47DFA0055A908 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488E68C517E47DFA0055A908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68D417E47DFA0055A908 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		488E68C617E47DFA0055A908 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		488E689B17E47DFA0055A908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68AF17E47DFA0055A908 /* main.m in Sources */,
+				488E68B317E47DFA0055A908 /* AppDelegate.m in Sources */,
+				488E68C217E47DFA0055A908 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488E68C317E47DFA0055A908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488E68D717E47DFA0055A908 /* Learner_Log_BookTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		488E68CE17E47DFA0055A908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 488E689E17E47DFA0055A908 /* Learner Log Book */;
+			targetProxy = 488E68CD17E47DFA0055A908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		488E68AB17E47DFA0055A908 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488E68AC17E47DFA0055A908 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488E68BB17E47DFA0055A908 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488E68BE17E47DFA0055A908 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		488E68D217E47DFA0055A908 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488E68D317E47DFA0055A908 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		488E68D817E47DFA0055A908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		488E68D917E47DFA0055A908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		488E68DB17E47DFA0055A908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
+				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		488E68DC17E47DFA0055A908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
+				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		488E68DE17E47DFA0055A908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Learner Log Book.app/Learner Log Book";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
+				INFOPLIST_FILE = "Learner Log BookTests/Learner Log BookTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		488E68DF17E47DFA0055A908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Learner Log Book.app/Learner Log Book";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
+				INFOPLIST_FILE = "Learner Log BookTests/Learner Log BookTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		488E689A17E47DFA0055A908 /* Build configuration list for PBXProject "Learner Log Book" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488E68D817E47DFA0055A908 /* Debug */,
+				488E68D917E47DFA0055A908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		488E68DA17E47DFA0055A908 /* Build configuration list for PBXNativeTarget "Learner Log Book" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488E68DB17E47DFA0055A908 /* Debug */,
+				488E68DC17E47DFA0055A908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		488E68DD17E47DFA0055A908 /* Build configuration list for PBXNativeTarget "Learner Log BookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488E68DE17E47DFA0055A908 /* Debug */,
+				488E68DF17E47DFA0055A908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 488E689717E47DFA0055A908 /* Project object */;
+}
