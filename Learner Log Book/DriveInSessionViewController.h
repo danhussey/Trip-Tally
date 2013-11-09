@@ -1,0 +1,20 @@
+//
+//  DriveInSessionViewController.h
+//  Learner Log Book
+//
+//  Created by Daniel Hussey on 2/10/13.
+//  Copyright (c) 2013 Daniel Hussey. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "ExtendedCell.h"
+
+@interface DriveInSessionViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *driveStatusButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *finishedButton;
+
+@end

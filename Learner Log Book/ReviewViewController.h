@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ReviewViewController.h
 //  Learner Log Book
 //
 //  Created by Daniel Hussey on 14/09/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ReviewViewController : UIViewController
 
 @end

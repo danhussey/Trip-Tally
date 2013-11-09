@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4824424417E48CAD002DC72A /* DriveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4824424317E48CAD002DC72A /* DriveViewController.m */; };
+		486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */; };
+		486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486BD58617F6C5C100E38172 /* CoreData.framework */; };
+		486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5BD17F8521E00E38172 /* ExtendedCell.m */; };
+		488A053C1801544B00B3DA2E /* DriveCompletedDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488A053B1801544B00B3DA2E /* DriveCompletedDetailsViewController.m */; };
+		488A05461801650A00B3DA2E /* BinarySelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488A05451801650A00B3DA2E /* BinarySelectionCell.m */; };
 		488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A217E47DFA0055A908 /* UIKit.framework */; };
 		488E68A517E47DFA0055A908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A417E47DFA0055A908 /* Foundation.framework */; };
 		488E68A717E47DFA0055A908 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A617E47DFA0055A908 /* CoreGraphics.framework */; };
@@ -17,13 +23,15 @@
 		488E68B717E47DFA0055A908 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 488E68B617E47DFA0055A908 /* Default@2x.png */; };
 		488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 488E68B817E47DFA0055A908 /* Default-568h@2x.png */; };
 		488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */; };
-		488E68BF17E47DFA0055A908 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */; };
-		488E68C217E47DFA0055A908 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68C117E47DFA0055A908 /* ViewController.m */; };
 		488E68CA17E47DFA0055A908 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68C917E47DFA0055A908 /* SenTestingKit.framework */; };
 		488E68CB17E47DFA0055A908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A217E47DFA0055A908 /* UIKit.framework */; };
 		488E68CC17E47DFA0055A908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488E68A417E47DFA0055A908 /* Foundation.framework */; };
 		488E68D417E47DFA0055A908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 488E68D217E47DFA0055A908 /* InfoPlist.strings */; };
 		488E68D717E47DFA0055A908 /* Learner_Log_BookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */; };
+		488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68E117E47E3D0055A908 /* StartscreenViewController.m */; };
+		488E698517E489570055A908 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E698417E489570055A908 /* ReviewViewController.m */; };
+		48BD220717FC286E0093669F /* DriveInSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BD220617FC286E0093669F /* DriveInSessionViewController.m */; };
+		48EB0F0317FEAA2B0007E2E7 /* DriveDetailsSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +45,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4824424217E48CAD002DC72A /* DriveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveViewController.h; sourceTree = "<group>"; };
+		4824424317E48CAD002DC72A /* DriveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveViewController.m; sourceTree = "<group>"; };
+		486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learner_Log_Book.xcdatamodel; sourceTree = "<group>"; };
+		486BD58617F6C5C100E38172 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		486BD5BC17F8521E00E38172 /* ExtendedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedCell.h; sourceTree = "<group>"; };
+		486BD5BD17F8521E00E38172 /* ExtendedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedCell.m; sourceTree = "<group>"; };
+		488A053A1801544B00B3DA2E /* DriveCompletedDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveCompletedDetailsViewController.h; sourceTree = "<group>"; };
+		488A053B1801544B00B3DA2E /* DriveCompletedDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveCompletedDetailsViewController.m; sourceTree = "<group>"; };
+		488A05441801650A00B3DA2E /* BinarySelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinarySelectionCell.h; path = "Learner Log Book/BinarySelectionCell.h"; sourceTree = "<group>"; };
+		488A05451801650A00B3DA2E /* BinarySelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BinarySelectionCell.m; path = "Learner Log Book/BinarySelectionCell.m"; sourceTree = "<group>"; };
 		488E689F17E47DFA0055A908 /* Learner Log Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learner Log Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		488E68A217E47DFA0055A908 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		488E68A417E47DFA0055A908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,15 +69,20 @@
 		488E68B617E47DFA0055A908 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		488E68B817E47DFA0055A908 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		488E68BB17E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		488E68BE17E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		488E68C017E47DFA0055A908 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		488E68C117E47DFA0055A908 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		488E68C817E47DFA0055A908 /* Learner Log BookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Learner Log BookTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		488E68C917E47DFA0055A908 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		488E68D117E47DFA0055A908 /* Learner Log BookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Learner Log BookTests-Info.plist"; sourceTree = "<group>"; };
 		488E68D317E47DFA0055A908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		488E68D517E47DFA0055A908 /* Learner_Log_BookTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Learner_Log_BookTests.h; sourceTree = "<group>"; };
 		488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Learner_Log_BookTests.m; sourceTree = "<group>"; };
+		488E68E017E47E3D0055A908 /* StartscreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartscreenViewController.h; sourceTree = "<group>"; };
+		488E68E117E47E3D0055A908 /* StartscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartscreenViewController.m; sourceTree = "<group>"; };
+		488E698317E489570055A908 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		488E698417E489570055A908 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		48BD220517FC286E0093669F /* DriveInSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveInSessionViewController.h; sourceTree = "<group>"; };
+		48BD220617FC286E0093669F /* DriveInSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveInSessionViewController.m; sourceTree = "<group>"; };
+		48EB0F0117FEAA2B0007E2E7 /* DriveDetailsSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveDetailsSingleton.h; sourceTree = "<group>"; };
+		48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveDetailsSingleton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */,
 				488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */,
 				488E68A517E47DFA0055A908 /* Foundation.framework in Frameworks */,
 				488E68A717E47DFA0055A908 /* CoreGraphics.framework in Frameworks */,
@@ -86,9 +110,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		488A053D1801550400B3DA2E /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				486BD5BC17F8521E00E38172 /* ExtendedCell.h */,
+				486BD5BD17F8521E00E38172 /* ExtendedCell.m */,
+			);
+			name = "Custom Cells";
+			path = "Learner Log Book";
+			sourceTree = "<group>";
+		};
 		488E689617E47DFA0055A908 = {
 			isa = PBXGroup;
 			children = (
+				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
+				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
+				488A053D1801550400B3DA2E /* Custom Cells */,
 				488E68A817E47DFA0055A908 /* Learner Log Book */,
 				488E68CF17E47DFA0055A908 /* Learner Log BookTests */,
 				488E68A117E47DFA0055A908 /* Frameworks */,
@@ -108,6 +145,7 @@
 		488E68A117E47DFA0055A908 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				486BD58617F6C5C100E38172 /* CoreData.framework */,
 				488E68A217E47DFA0055A908 /* UIKit.framework */,
 				488E68A417E47DFA0055A908 /* Foundation.framework */,
 				488E68A617E47DFA0055A908 /* CoreGraphics.framework */,
@@ -119,12 +157,22 @@
 		488E68A817E47DFA0055A908 /* Learner Log Book */ = {
 			isa = PBXGroup;
 			children = (
+				488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */,
+				486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */,
+				488A053A1801544B00B3DA2E /* DriveCompletedDetailsViewController.h */,
+				488A053B1801544B00B3DA2E /* DriveCompletedDetailsViewController.m */,
+				48BD220517FC286E0093669F /* DriveInSessionViewController.h */,
+				48BD220617FC286E0093669F /* DriveInSessionViewController.m */,
+				4824424217E48CAD002DC72A /* DriveViewController.h */,
+				4824424317E48CAD002DC72A /* DriveViewController.m */,
+				488E68E017E47E3D0055A908 /* StartscreenViewController.h */,
+				488E68E117E47E3D0055A908 /* StartscreenViewController.m */,
+				488E698317E489570055A908 /* ReviewViewController.h */,
+				488E698417E489570055A908 /* ReviewViewController.m */,
 				488E68B117E47DFA0055A908 /* AppDelegate.h */,
 				488E68B217E47DFA0055A908 /* AppDelegate.m */,
-				488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */,
-				488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */,
-				488E68C017E47DFA0055A908 /* ViewController.h */,
-				488E68C117E47DFA0055A908 /* ViewController.m */,
+				48EB0F0117FEAA2B0007E2E7 /* DriveDetailsSingleton.h */,
+				48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */,
 				488E68A917E47DFA0055A908 /* Supporting Files */,
 			);
 			path = "Learner Log Book";
@@ -239,7 +287,6 @@
 				488E68B717E47DFA0055A908 /* Default@2x.png in Resources */,
 				488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */,
 				488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */,
-				488E68BF17E47DFA0055A908 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,8 +322,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				488E68AF17E47DFA0055A908 /* main.m in Sources */,
+				48EB0F0317FEAA2B0007E2E7 /* DriveDetailsSingleton.m in Sources */,
 				488E68B317E47DFA0055A908 /* AppDelegate.m in Sources */,
-				488E68C217E47DFA0055A908 /* ViewController.m in Sources */,
+				488A05461801650A00B3DA2E /* BinarySelectionCell.m in Sources */,
+				488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */,
+				488E698517E489570055A908 /* ReviewViewController.m in Sources */,
+				4824424417E48CAD002DC72A /* DriveViewController.m in Sources */,
+				488A053C1801544B00B3DA2E /* DriveCompletedDetailsViewController.m in Sources */,
+				486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */,
+				486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */,
+				48BD220717FC286E0093669F /* DriveInSessionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,14 +368,6 @@
 				488E68BB17E47DFA0055A908 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		488E68BD17E47DFA0055A908 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				488E68BE17E47DFA0055A908 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		488E68D217E47DFA0055A908 /* InfoPlist.strings */ = {
@@ -398,7 +445,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
 				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -409,7 +458,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
 				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -467,6 +518,7 @@
 				488E68DC17E47DFA0055A908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		488E68DD17E47DFA0055A908 /* Build configuration list for PBXNativeTarget "Learner Log BookTests" */ = {
 			isa = XCConfigurationList;
@@ -475,8 +527,22 @@
 				488E68DF17E47DFA0055A908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */,
+			);
+			currentVersion = 486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */;
+			path = Learner_Log_Book.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 488E689717E47DFA0055A908 /* Project object */;
 }
