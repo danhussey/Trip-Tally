@@ -9,8 +9,6 @@
 //Note: Extended Cell is quite specialized to this logbook app
 //Stop scrolling, make it a stationary view
 //Add the swipe up to delete shit
-//Only one text field at a time
-//Give up first responder when screen is tapped outside of 
 
 #import "ExtendedCell.h"
 
@@ -247,6 +245,7 @@
         if([self.textLabel.text isEqualToString:[NSString stringWithFormat:@"Add New %@...", self.cellType]]) {
             if (![self.contentView viewWithTag:1984]) { //If there isn't already a text box
                 //Add text box (Warning, it's invisible usually)
+                self.textLabel.hidden = YES;
                 UITextField *textField = [[UITextField alloc]initWithFrame:self.textLabel.frame];
                 textField.clearsOnBeginEditing = NO;
                 textField.delegate = self;
@@ -317,10 +316,16 @@
     else if (textField.tag == 1984 && [self.cellType isEqualToString:@"Odometer"]) [self alterOdometerWithTextField:textField];
     else if (textField.tag == 69) [self editExistingDetailFromField:textField];
     [textField removeFromSuperview]; //Get rid of text box
-    if (self.hidden) self.hidden = NO;
     [self updateCellContents];
     [self endEditing:YES];
     
+    return YES;
+}
+
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField removeFromSuperview]; //Get rid of text box
+    if (self.textLabel.hidden) self.textLabel.hidden = NO;
     return YES;
 }
 
@@ -365,11 +370,11 @@
 - (BOOL) hasDuplicateInDatabase: (NSString*) text {
     for (id element in self.cellData) {
         if ([element isKindOfClass:[NSString class]]) {
-            if ([text isEqualToString:element]) return YES;
+            if ([text caseInsensitiveCompare:element] == NSOrderedSame) return YES;
         }
         if ([element isKindOfClass:[NSManagedObject class]]) {
             NSString* objectText = [element valueForKey:@"generalKey"];
-            if ([text isEqualToString:objectText]) return YES;
+            if ([text caseInsensitiveCompare:objectText] == NSOrderedSame) return YES;
         }
     }
     return NO;
