@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4824424417E48CAD002DC72A /* DriveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4824424317E48CAD002DC72A /* DriveViewController.m */; };
+		4835E0921830C172000236DA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4835E0911830C172000236DA /* CoreLocation.framework */; };
+		4835E094183134DD000236DA /* vicCriteria.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4835E093183134DD000236DA /* vicCriteria.plist */; };
 		486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */; };
 		486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486BD58617F6C5C100E38172 /* CoreData.framework */; };
 		486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5BD17F8521E00E38172 /* ExtendedCell.m */; };
@@ -47,14 +49,16 @@
 /* Begin PBXFileReference section */
 		4824424217E48CAD002DC72A /* DriveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveViewController.h; sourceTree = "<group>"; };
 		4824424317E48CAD002DC72A /* DriveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveViewController.m; sourceTree = "<group>"; };
+		4835E0911830C172000236DA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4835E093183134DD000236DA /* vicCriteria.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = vicCriteria.plist; sourceTree = "<group>"; };
 		486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learner_Log_Book.xcdatamodel; sourceTree = "<group>"; };
 		486BD58617F6C5C100E38172 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		486BD5BC17F8521E00E38172 /* ExtendedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedCell.h; sourceTree = "<group>"; };
 		486BD5BD17F8521E00E38172 /* ExtendedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedCell.m; sourceTree = "<group>"; };
 		488A053A1801544B00B3DA2E /* DriveCompletedDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveCompletedDetailsViewController.h; sourceTree = "<group>"; };
 		488A053B1801544B00B3DA2E /* DriveCompletedDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveCompletedDetailsViewController.m; sourceTree = "<group>"; };
-		488A05441801650A00B3DA2E /* BinarySelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinarySelectionCell.h; path = "Learner Log Book/BinarySelectionCell.h"; sourceTree = "<group>"; };
-		488A05451801650A00B3DA2E /* BinarySelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BinarySelectionCell.m; path = "Learner Log Book/BinarySelectionCell.m"; sourceTree = "<group>"; };
+		488A05441801650A00B3DA2E /* BinarySelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinarySelectionCell.h; sourceTree = "<group>"; };
+		488A05451801650A00B3DA2E /* BinarySelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinarySelectionCell.m; sourceTree = "<group>"; };
 		488E689F17E47DFA0055A908 /* Learner Log Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learner Log Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		488E68A217E47DFA0055A908 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		488E68A417E47DFA0055A908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -90,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4835E0921830C172000236DA /* CoreLocation.framework in Frameworks */,
 				486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */,
 				488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */,
 				488E68A517E47DFA0055A908 /* Foundation.framework in Frameworks */,
@@ -113,6 +118,8 @@
 		488A053D1801550400B3DA2E /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
+				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
 				486BD5BC17F8521E00E38172 /* ExtendedCell.h */,
 				486BD5BD17F8521E00E38172 /* ExtendedCell.m */,
 			);
@@ -123,8 +130,6 @@
 		488E689617E47DFA0055A908 = {
 			isa = PBXGroup;
 			children = (
-				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
-				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
 				488A053D1801550400B3DA2E /* Custom Cells */,
 				488E68A817E47DFA0055A908 /* Learner Log Book */,
 				488E68CF17E47DFA0055A908 /* Learner Log BookTests */,
@@ -145,6 +150,7 @@
 		488E68A117E47DFA0055A908 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4835E0911830C172000236DA /* CoreLocation.framework */,
 				486BD58617F6C5C100E38172 /* CoreData.framework */,
 				488E68A217E47DFA0055A908 /* UIKit.framework */,
 				488E68A417E47DFA0055A908 /* Foundation.framework */,
@@ -181,6 +187,7 @@
 		488E68A917E47DFA0055A908 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4835E093183134DD000236DA /* vicCriteria.plist */,
 				488E68AA17E47DFA0055A908 /* Learner Log Book-Info.plist */,
 				488E68AB17E47DFA0055A908 /* InfoPlist.strings */,
 				488E68AE17E47DFA0055A908 /* main.m */,
@@ -284,6 +291,7 @@
 			files = (
 				488E68AD17E47DFA0055A908 /* InfoPlist.strings in Resources */,
 				488E68B517E47DFA0055A908 /* Default.png in Resources */,
+				4835E094183134DD000236DA /* vicCriteria.plist in Resources */,
 				488E68B717E47DFA0055A908 /* Default@2x.png in Resources */,
 				488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */,
 				488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */,

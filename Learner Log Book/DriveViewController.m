@@ -77,7 +77,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     tableData = [NSMutableArray arrayWithObjects:@"Car", @"Driver", @"Supervisor", @"Odometer", @"Drive", nil];

@@ -5,14 +5,42 @@
 //  Created by Daniel Hussey on 6/10/13.
 //  Copyright (c) 2013 Daniel Hussey. All rights reserved.
 //
+//  Fix handleswipe method to change the working mutable copy of the criteria
+//  NOTE: celldictionaryforpath returns new dictionary from immutable source every tie it's called
 
 #import "DriveCompletedDetailsViewController.h"
 
 @interface DriveCompletedDetailsViewController ()
-
+{
+    NSMutableArray *criteriaSectionKeys;
+    NSMutableDictionary *vicCriteriaDictionary;
+}
 @end
 
 @implementation DriveCompletedDetailsViewController
+
+- (NSMutableDictionary*) criteriaDictionary
+{
+    if (!_criteriaDictionary) {
+        NSString *thePath = [[NSBundle mainBundle]  pathForResource:@"vicCriteria" ofType:@"plist"];
+        NSData *criteriaData = [NSData dataWithContentsOfFile:thePath];
+        
+        NSError *error;
+        _criteriaDictionary = [NSPropertyListSerialization propertyListWithData:criteriaData
+                                                                        options:NSPropertyListMutableContainersAndLeaves format:NULL error:&error];
+        if (error) NSLog(@"%@", error.description);
+    }
+    return _criteriaDictionary;
+}
+
+- (NSMutableDictionary*) mutableCriteriaDictionary
+{
+    if (!_mutableCriteriaDictionary) {
+        NSString *thePath = [[NSBundle mainBundle]  pathForResource:@"vicCriteria" ofType:@"plist"];
+        _mutableCriteriaDictionary = [[NSDictionary dictionaryWithContentsOfFile:thePath] mutableCopy];
+    }
+    return _mutableCriteriaDictionary;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,9 +51,20 @@
     return self;
 }
 
+- (NSMutableDictionary*) cellDictionaryForPath: (NSIndexPath*) indexPath
+{
+    NSString *currentSectionKey = criteriaSectionKeys[indexPath.section];
+    NSArray *currentSectionArray = [self.criteriaDictionary objectForKey:currentSectionKey];
+    NSMutableDictionary *currentCellDictionary = currentSectionArray[indexPath.row];
+    return currentCellDictionary;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    criteriaSectionKeys = [self.mutableCriteriaDictionary objectForKey:@"sectionKeys"];
     
     //Add gesture recognizer to the tableView
     UISwipeGestureRecognizer *gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
@@ -51,7 +90,19 @@
     NSIndexPath *swipedIndexPath = [tableView indexPathForRowAtPoint:location];
     BinarySelectionCell *swipedCell  = (BinarySelectionCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
     
-    [swipedCell handleSwipeFrom:recognizer];
+    //NOTE: MAke global.
+    NSMutableDictionary *currentCellDictionary = [self cellDictionaryForPath:swipedIndexPath];
+    
+    if (!swipedCell.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionRight) { //Flip to tick
+        swipedCell.binaryPosition = true;
+        [currentCellDictionary setValue:[NSNumber numberWithBool:TRUE] forKey:@"Value"];
+        
+    }
+    else if (swipedCell.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionLeft) { //Flip to cross
+        swipedCell.binaryPosition = false;
+        [currentCellDictionary setValue:[NSNumber numberWithBool:FALSE] forKey:@"Value"];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,28 +115,38 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    int sections = criteriaSectionKeys.count;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 3;
+    int rows = [(NSMutableArray*)[self.criteriaDictionary objectForKey:criteriaSectionKeys[section]] count];
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    BinarySelectionCell *cell = (BinarySelectionCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    BinarySelectionCell *cell = (BinarySelectionCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == Nil) {
+        cell = [[BinarySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
-    [cell setupCell];
-    NSLog(cell.description);
+    NSMutableDictionary *currentCellDictionary = [self cellDictionaryForPath:indexPath];
+    cell.dynamicView.textLabel.text = [currentCellDictionary objectForKey:@"Title"];
+    [cell snapToBinaryPosition:[[currentCellDictionary objectForKey:@"Value"] boolValue]];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self.criteriaDictionary objectForKey:@"sectionKeys"] objectAtIndex:section];
 }
 
 /*

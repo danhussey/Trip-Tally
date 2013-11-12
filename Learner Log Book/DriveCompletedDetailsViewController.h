@@ -11,4 +11,7 @@
 
 @interface DriveCompletedDetailsViewController : UITableViewController
 
+@property (strong, nonatomic) NSMutableDictionary *mutableCriteriaDictionary;
+@property (strong, nonatomic) NSMutableDictionary *criteriaDictionary;
+
 @end

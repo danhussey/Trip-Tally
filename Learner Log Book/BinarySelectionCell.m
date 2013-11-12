@@ -12,19 +12,37 @@
 
 @interface BinarySelectionCell ()
 
+{
+    CGRect tickPosition;
+    CGRect crossPosition;
+}
 @property (strong, nonatomic) NSMutableArray *arrayOfAllThingsIDraw;
 
 @end
 
 @implementation BinarySelectionCell
 
-- (void) setupCell
+- (void) setBinaryPosition:(BOOL)binaryPosition
 {
-    self.binaryPosition = NO; //All cells begin in the NO position
-    self.dynamicCellTitle = @"Unset";
-    self.dynamicView = [[UIView alloc] initWithFrame:CGRectMake(60, 0, 260, self.bounds.size.height)];
-    self.dynamicView.backgroundColor = [UIColor blueColor];
-    [self.contentView addSubview:self.dynamicView];
+    _binaryPosition = binaryPosition;
+    if (binaryPosition == YES) {
+        [UIView animateWithDuration:0.12 animations:^{self.dynamicView.frame = tickPosition;}];
+    }
+    else if (binaryPosition == NO){
+        [UIView animateWithDuration:0.12 animations:^{self.dynamicView.frame = crossPosition;}];
+    }
+    
+}
+
+- (void) snapToBinaryPosition:(BOOL)binaryPosition
+{
+    _binaryPosition = binaryPosition;
+    if (binaryPosition) {
+        self.dynamicView.frame = tickPosition;
+    }
+    else {
+        self.dynamicView.frame = crossPosition;
+    }
     
 }
 
@@ -32,7 +50,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        tickPosition = CGRectMake(60, 0, 260, self.bounds.size.height);
+        crossPosition = CGRectMake(0, 0, 260, self.bounds.size.height);
+        
+        self.dynamicView.textLabel.text = @"Unset";
+        self.dynamicView = [[UITableViewCell alloc] initWithFrame:CGRectMake(60, 0, 260, self.bounds.size.height)];
+        self.dynamicView.backgroundColor = [UIColor blueColor];
+        self.dynamicView.frame = crossPosition;
+        self.binaryPosition = NO; //All cells begin in the NO position
+        [self.contentView addSubview:self.dynamicView];
     }
     return self;
 }
@@ -42,21 +68,6 @@
     //[super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-- (void) handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
-{
-    CGRect tickPosition = CGRectMake(0, 0, 260, self.bounds.size.height);
-    CGRect crossPosition = CGRectMake(60, 0, 260, self.bounds.size.height);
-    
-    if (!self.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionLeft) { //Flip to tick
-        [UIView animateWithDuration:0.12 animations:^{self.dynamicView.frame = tickPosition;}];
-        self.binaryPosition = !self.binaryPosition;
-    }
-    else if (self.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionRight) { //Flip to cross
-        [UIView animateWithDuration:0.12 animations:^{self.dynamicView.frame = crossPosition;}];
-        self.binaryPosition = !self.binaryPosition;
-    }
 }
 
 @end

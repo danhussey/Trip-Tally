@@ -10,12 +10,9 @@
 
 @interface BinarySelectionCell : UITableViewCell
 
-- (void) setupCell;
-- (void) handleSwipeFrom:(UISwipeGestureRecognizer*)recognizer;
+- (void) snapToBinaryPosition:(BOOL)binaryPosition;
 
 @property (nonatomic) BOOL binaryPosition;
-@property (strong, nonatomic) UITableViewCell *dynamicInnerCell;
-@property (strong, nonatomic) NSString *dynamicCellTitle;
-@property (strong, nonatomic) UIView *dynamicView;
+@property (strong, nonatomic) UITableViewCell *dynamicView;
 
 @end

@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "ExtendedCell.h"
 
-@interface DriveInSessionViewController : UIViewController
+@interface DriveInSessionViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
-
 @property (strong, nonatomic) IBOutlet UIButton *driveStatusButton;
-
 @property (strong, nonatomic) IBOutlet UIButton *finishedButton;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSMutableArray *recordedLocationsArray;
 
 @end
