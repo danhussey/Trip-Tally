@@ -14,5 +14,6 @@
 
 @property (nonatomic) BOOL binaryPosition;
 @property (strong, nonatomic) UITableViewCell *dynamicView;
+@property (nonatomic) BOOL isFinishedCell;
 
 @end

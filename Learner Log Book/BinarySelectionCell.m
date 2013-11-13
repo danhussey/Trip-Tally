@@ -46,6 +46,16 @@
     
 }
 
+- (void) setIsFinishedCell:(BOOL)isFinishedCell
+{
+    _isFinishedCell = isFinishedCell;
+    if (_isFinishedCell) {
+        //Setup the cell for it's special position.
+        self.dynamicView.textLabel.text = @"Finished";
+        //NOTE: Change the icon on the right to something else to signify the finishedness of the wipe (To the next screen)
+    }
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -5,15 +5,12 @@
 //  Created by Daniel Hussey on 6/10/13.
 //  Copyright (c) 2013 Daniel Hussey. All rights reserved.
 //
-//  Fix handleswipe method to change the working mutable copy of the criteria
-//  NOTE: celldictionaryforpath returns new dictionary from immutable source every tie it's called
 
 #import "DriveCompletedDetailsViewController.h"
 
 @interface DriveCompletedDetailsViewController ()
 {
     NSMutableArray *criteriaSectionKeys;
-    NSMutableDictionary *vicCriteriaDictionary;
 }
 @end
 
@@ -33,15 +30,6 @@
     return _criteriaDictionary;
 }
 
-- (NSMutableDictionary*) mutableCriteriaDictionary
-{
-    if (!_mutableCriteriaDictionary) {
-        NSString *thePath = [[NSBundle mainBundle]  pathForResource:@"vicCriteria" ofType:@"plist"];
-        _mutableCriteriaDictionary = [[NSDictionary dictionaryWithContentsOfFile:thePath] mutableCopy];
-    }
-    return _mutableCriteriaDictionary;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -53,10 +41,13 @@
 
 - (NSMutableDictionary*) cellDictionaryForPath: (NSIndexPath*) indexPath
 {
-    NSString *currentSectionKey = criteriaSectionKeys[indexPath.section];
-    NSArray *currentSectionArray = [self.criteriaDictionary objectForKey:currentSectionKey];
-    NSMutableDictionary *currentCellDictionary = currentSectionArray[indexPath.row];
-    return currentCellDictionary;
+    if (indexPath.section < criteriaSectionKeys.count) {
+        NSString *currentSectionKey = criteriaSectionKeys[indexPath.section];
+        NSArray *currentSectionArray = [self.criteriaDictionary objectForKey:currentSectionKey];
+        NSMutableDictionary *currentCellDictionary = currentSectionArray[indexPath.row];
+        return currentCellDictionary;
+    }
+    else return nil;
 }
 
 
@@ -64,7 +55,7 @@
 {
     [super viewDidLoad];
     
-    criteriaSectionKeys = [self.mutableCriteriaDictionary objectForKey:@"sectionKeys"];
+    criteriaSectionKeys = [self.criteriaDictionary objectForKey:@"sectionKeys"];
     
     //Add gesture recognizer to the tableView
     UISwipeGestureRecognizer *gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
@@ -96,6 +87,7 @@
     if (!swipedCell.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionRight) { //Flip to tick
         swipedCell.binaryPosition = true;
         [currentCellDictionary setValue:[NSNumber numberWithBool:TRUE] forKey:@"Value"];
+        if (swipedCell.isFinishedCell) [self finishedCellSwiped];
         
     }
     else if (swipedCell.binaryPosition && recognizer.direction == UISwipeGestureRecognizerDirectionLeft) { //Flip to cross
@@ -117,14 +109,19 @@
 {
     // Return the number of sections.
     int sections = criteriaSectionKeys.count;
-    return sections;
+    return (sections+1);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    int rows = [(NSMutableArray*)[self.criteriaDictionary objectForKey:criteriaSectionKeys[section]] count];
-    return rows;
+    if (section == criteriaSectionKeys.count) { //Finish section
+        return 1;
+    }
+    else {
+        int rows = [(NSMutableArray*)[self.criteriaDictionary objectForKey:criteriaSectionKeys[section]] count];
+        return rows;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,21 +129,48 @@
     static NSString *CellIdentifier = @"Cell";
     
     BinarySelectionCell *cell = (BinarySelectionCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == Nil) {
+    if (cell == Nil && indexPath.section < criteriaSectionKeys.count) {
         cell = [[BinarySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
-    NSMutableDictionary *currentCellDictionary = [self cellDictionaryForPath:indexPath];
-    cell.dynamicView.textLabel.text = [currentCellDictionary objectForKey:@"Title"];
-    [cell snapToBinaryPosition:[[currentCellDictionary objectForKey:@"Value"] boolValue]];
+    if (indexPath.section < criteriaSectionKeys.count) {
+        NSMutableDictionary *currentCellDictionary = [self cellDictionaryForPath:indexPath];
+        cell.dynamicView.textLabel.text = [currentCellDictionary objectForKey:@"Title"];
+        [cell snapToBinaryPosition:[[currentCellDictionary objectForKey:@"Value"] boolValue]];
+    }
+    
+    else {
+        cell.isFinishedCell = YES;
+    }
     
     return cell;
 }
 
+- (void) finishedCellSwiped
+{
+    //Go to finished page
+    [self performSegueWithIdentifier:@"toRecentDriveReview" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    DriveDetailsSingleton *singleton = [DriveDetailsSingleton sharedInstance];
+    singleton.driveCompletionBinaryDetails = self.criteriaDictionary;
+    if ([segue.identifier  isEqualToString:@"toRecentDriveReview"]) {
+        [((RecentDriveReviewViewController*) segue.destinationViewController) setDisplaySave:YES];
+    }
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[self.criteriaDictionary objectForKey:@"sectionKeys"] objectAtIndex:section];
+    if (section < criteriaSectionKeys.count) {
+        return [[self.criteriaDictionary objectForKey:@"sectionKeys"] objectAtIndex:section];
+    }
+    
+    else if (section == criteriaSectionKeys.count) {
+        return @"Finished";
+    }
 }
 
 /*
