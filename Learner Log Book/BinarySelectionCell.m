@@ -51,6 +51,7 @@
     _isFinishedCell = isFinishedCell;
     if (_isFinishedCell) {
         //Setup the cell for it's special position.
+        self.binaryPosition = NO;
         self.dynamicView.textLabel.text = @"Finished";
         //NOTE: Change the icon on the right to something else to signify the finishedness of the wipe (To the next screen)
     }

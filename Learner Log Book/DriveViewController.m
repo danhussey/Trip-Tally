@@ -10,6 +10,7 @@
 //  Add cell deleting
 //  Remove the scrolling element
 //  Means implement autoLayout
+//  All view controllers in the driverecord generating sequence MUST have their driverecord set by the view before it. What happens if it's not? Shitstorm. ShitPHOON!
 
 #import "DriveViewController.h"
 
@@ -162,7 +163,6 @@
     //This is some terrible programming.
     if ([tappedCell.cellType isEqualToString:@"Drive"]) //If it's the drive button
     {
-        DriveDetailsSingleton *singleton = [DriveDetailsSingleton sharedInstance];
         BOOL readyForDrive = YES;
         
         for (int i = 0; i < 4; i++) {
@@ -173,22 +173,30 @@
         if (readyForDrive) {
             for (int i = 0; i < 4; i++) {
                 ExtendedCell *cell = (ExtendedCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-                [self synchroniseDataFromCell:cell toSingleton:singleton];
+                [self synchroniseDataToManagedObjectFromCell:cell];
             }
-            [self performSegueWithIdentifier:@"pushToDriveSession" sender:tappedCell];
+            [self performSegueWithIdentifier:@"toDriveInSessionSegue" sender:tappedCell];
         }
     }
     
     else [tappedCell handleTapFrom:recognizer];
 }
 
-- (void) synchroniseDataFromCell:(ExtendedCell *)cell toSingleton:(DriveDetailsSingleton*)singleton
+- (void) synchroniseDataToManagedObjectFromCell:(ExtendedCell *)cell
 {
     if ([cell isInCustomDetailPosition]) {
-        if ([cell.cellType isEqualToString:@"Car"]) singleton.car = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Driver"]) singleton.driver = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Supervisor"]) singleton.supervisor = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Odometer"]) singleton.odometer = cell.textLabel.text;
+        if ([cell.cellType isEqualToString:@"Car"]) self.driveRecord.driveDetailContainer.car = cell.textLabel.text;
+        else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.textLabel.text;
+        else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.textLabel.text;
+        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometer = cell.textLabel.text;
+    }
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"toDriveInSessionSegue"]) {
+        UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
+        nextViewController.driveRecord = self.driveRecord;
     }
 }
 /*

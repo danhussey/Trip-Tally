@@ -291,7 +291,7 @@
         else return YES;
     }
     else {
-        if ([self.textLabel.text isEqualToString:@"Odometer"]) return NO;
+        if (![self.textLabel.text isEqualToString:@"Odometer"]) return YES;
     }
 }
 

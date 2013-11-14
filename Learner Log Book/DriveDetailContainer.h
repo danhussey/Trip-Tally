@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "DriveDetailsSingleton.h"
 
 @interface DriveDetailContainer : NSObject <NSCoding>
 
@@ -18,7 +17,5 @@
 @property (strong, nonatomic) NSDictionary *driveCompletionBinaryDetails;
 @property (strong, nonatomic) NSDate *startDate, *endDate;
 
--(void) detailsFromSingleton: (DriveDetailsSingleton*) singleton;
-+(DriveDetailContainer*) containerFromSingleton: (DriveDetailsSingleton*) singleton;
 
 @end

@@ -155,11 +155,14 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    DriveDetailsSingleton *singleton = [DriveDetailsSingleton sharedInstance];
-    singleton.driveCompletionBinaryDetails = self.criteriaDictionary;
+    self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails = self.criteriaDictionary;
     if ([segue.identifier  isEqualToString:@"toRecentDriveReview"]) {
         [((RecentDriveReviewViewController*) segue.destinationViewController) setDisplaySave:YES];
+        
+        UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
+        nextViewController.driveRecord = self.driveRecord;
     }
+    //[self.navigationController dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -171,6 +174,7 @@
     else if (section == criteriaSectionKeys.count) {
         return @"Finished";
     }
+    else return nil;
 }
 
 /*
@@ -221,7 +225,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-
  */
 
 @end
+

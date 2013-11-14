@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/ExtendedCell.m"
-            timestampString = "405837442.804314"
+            filePath = "Learner Log Book/RecentDriveReviewViewController.m"
+            timestampString = "406148767.677302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "-editExistingDetailFromField:"
-            landmarkType = "5">
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "@implementation RecentDriveReviewViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/ExtendedCell.m"
-            timestampString = "405837442.804314"
+            filePath = "Learner Log Book/RecentDriveReviewViewController.m"
+            timestampString = "406148767.677302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "-editExistingDetailFromField:"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "-topRightNavButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

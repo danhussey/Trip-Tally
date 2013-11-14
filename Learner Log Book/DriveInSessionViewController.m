@@ -53,9 +53,8 @@
 }
 
 - (IBAction)doFinishedButton:(UIButton *)sender {
-    DriveDetailsSingleton *singleton = [DriveDetailsSingleton sharedInstance];
-    singleton.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
-    singleton.endDate = [NSDate date];
+    self.driveRecord.driveDetailContainer.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
+    self.driveRecord.driveDetailContainer.endDate = [NSDate date];
 }
 
 - (CLLocationDistance)distanceTravelledFromLocations:(NSMutableArray*)locations
@@ -87,8 +86,7 @@
     self.driveStatusButton.backgroundColor = [UIColor greenColor];
     [self setupTimer];
     [self startTimer]; //View only loads once... right?
-    DriveDetailsSingleton *singleton = [DriveDetailsSingleton sharedInstance];
-    singleton.startDate = [NSDate date];
+    self.driveRecord.driveDetailContainer.startDate = [NSDate date];
     
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorized:
@@ -204,6 +202,14 @@
 {
     [self.locationManager stopUpdatingHeading];
     [self.locationManager stopUpdatingLocation];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"toDriveCompletedSegue"]) {
+        UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
+        nextViewController.driveRecord = self.driveRecord;
+    }
 }
 
 @end

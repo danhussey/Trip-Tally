@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DriveRecord.h"
+#import "DriveViewController.h"
 
 @interface StartscreenViewController : UIViewController
+
+- (void) defuseManagedObjectDeleter;
 
 @end

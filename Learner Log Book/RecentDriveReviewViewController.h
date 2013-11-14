@@ -10,12 +10,13 @@
 #import "DriveDetailContainer.h"
 #import <CoreData/CoreData.h>
 #import "DriveRecord.h"
-#import "DriveDetailsSingleton.h"
+#import "DriveRecordDeveloper.h"
 
-@interface RecentDriveReviewViewController : UIViewController
+@interface RecentDriveReviewViewController : UIViewController <DriveRecordDeveloper>
 
 @property (weak, nonatomic) IBOutlet UILabel *detailsTextBox;
 @property (nonatomic, strong) DriveDetailContainer* driveDetails;
+@property (nonatomic, strong) DriveRecord *driveRecord;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *topRightNavButton;
 @property (nonatomic) BOOL displaySave;
 

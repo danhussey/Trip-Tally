@@ -10,8 +10,10 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "ExtendedCell.h"
-#import "DriveDetailsSingleton.h"
+#import "DriveRecordDeveloper.h"
 
-@interface DriveViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DriveViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, DriveRecordDeveloper>
+
+@property (strong, nonatomic) DriveRecord *driveRecord;
 
 @end

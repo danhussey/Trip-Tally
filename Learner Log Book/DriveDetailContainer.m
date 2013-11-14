@@ -47,35 +47,6 @@
     [aCoder encodeInteger:self.distanceTravelled forKey:@"distanceTravelled"];
     
     NSLog(@"shit");
-    
-}
-
-- (void) detailsFromSingleton:(DriveDetailsSingleton *)singleton
-{
-    self.elapsedTime = singleton.elapsedTime;
-    self.driver = singleton.driver;
-    self.supervisor = singleton.supervisor;
-    self.odometer = singleton.odometer;
-    self.car = singleton.car;
-    self.distanceTravelled = singleton.distanceTravelled;
-    self.driveCompletionBinaryDetails = singleton.driveCompletionBinaryDetails;
-    self.startDate = singleton.startDate;
-    self.endDate = singleton.endDate;
-}
-
-+ (DriveDetailContainer*) containerFromSingleton:(DriveDetailsSingleton *)singleton
-{
-    DriveDetailContainer *newContainer = [[DriveDetailContainer alloc] init];
-    newContainer.elapsedTime = singleton.elapsedTime;
-    newContainer.driver = singleton.driver;
-    newContainer.supervisor = singleton.supervisor;
-    newContainer.odometer = singleton.odometer;
-    newContainer.car = singleton.car;
-    newContainer.distanceTravelled = singleton.distanceTravelled;
-    newContainer.driveCompletionBinaryDetails = singleton.driveCompletionBinaryDetails;
-    newContainer.startDate = singleton.startDate;
-    newContainer.endDate = singleton.endDate;
-    return newContainer;
 }
 
 

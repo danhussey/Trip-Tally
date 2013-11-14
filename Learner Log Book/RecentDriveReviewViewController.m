@@ -21,14 +21,23 @@
 {
     if ([sender.title isEqualToString:@"Save"]) {
         NSManagedObjectContext *context = [self managedObjectContext];
-        DriveRecord *newObject = (DriveRecord*)[NSEntityDescription insertNewObjectForEntityForName:@"DriveRecord" inManagedObjectContext:context];
-        newObject.driveDetailContainer = self.driveDetails;
         NSError *error = nil;
         // Save the object to persistent store
         if (![context save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
+        [self.navigationController.viewControllers[0] performSelector:@selector(defuseManagedObjectDeleter)];
+        //Add metres to the odometer (Futile, I know, but I might as well)
+        //NOTE: Update when the singleton has been changed to an instance of DriveRecord
+        
     }
+
+    else if ([sender.title isEqualToString:@"Done"]) { //Came from review, so return to review
+        //[self performSegueWithIdentifier:@"returnToDriveReviewSegue" sender:self];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -38,6 +47,14 @@
         context = [delegate managedObjectContext];
     }
     return context;
+}
+
+- (DriveDetailContainer*) driveDetails
+{
+    if (!_driveDetails) {
+        _driveDetails = self.driveRecord.driveDetailContainer;
+    }
+    return _driveDetails;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,11 +72,16 @@
 	// Do any additional setup after loading the view.
     if (self.displaySave) {
         [self.topRightNavButton setTitle:@"Save"];
-        self.driveDetails = [DriveDetailContainer containerFromSingleton:[DriveDetailsSingleton sharedInstance]];
+        //self.driveDetails = [DriveDetailContainer containerFromSingleton:[DriveDetailsSingleton sharedInstance]];
     }
     
+    else if ([self.topRightNavButton.title isEqualToString:@"Done"]) {
+        self.topRightNavButton.style = UIBarButtonItemStylePlain;
+        self.topRightNavButton.enabled = false;
+        self.topRightNavButton.title = nil;
+    }
     
-    NSString *string = [NSString stringWithFormat:@"Date and time: %@\nDriving Time: %f\n Odometer Start: %i \nOdometer Finish: %f\n And all this stuff: %@", self.driveDetails.startDate.description, self.driveDetails.elapsedTime, self.driveDetails.odometer.intValue, (self.driveDetails.odometer.intValue + self.driveDetails.distanceTravelled), self.driveDetails.driveCompletionBinaryDetails.description];
+    NSString *string = [NSString stringWithFormat:@"Date and time: %@\nDriving Time: %f\n Odometer Start: %i \nOdometer Finish: %f\n And all this stuff: %@", self.driveRecord.driveDetailContainer.startDate.description, self.driveDetails.elapsedTime, self.driveRecord.driveDetailContainer.odometer.intValue, (self.driveRecord.driveDetailContainer.odometer.intValue + self.driveRecord.driveDetailContainer.distanceTravelled), self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails.description];
     self.detailsTextBox.text = string;
 }
 

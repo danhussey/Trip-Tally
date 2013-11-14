@@ -10,9 +10,11 @@
 #import "BinarySelectionCell.h"
 #import "DriveDetailContainer.h"
 #import "RecentDriveReviewViewController.h"
+#import "DriveRecordDeveloper.h"
 
-@interface DriveCompletedDetailsViewController : UITableViewController
+@interface DriveCompletedDetailsViewController : UITableViewController <DriveRecordDeveloper>
 
 @property (strong, nonatomic) NSMutableDictionary *criteriaDictionary;
+@property (strong, nonatomic) DriveRecord *driveRecord;
 
 @end

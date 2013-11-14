@@ -34,9 +34,8 @@
 		488E68D417E47DFA0055A908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 488E68D217E47DFA0055A908 /* InfoPlist.strings */; };
 		488E68D717E47DFA0055A908 /* Learner_Log_BookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */; };
 		488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68E117E47E3D0055A908 /* StartscreenViewController.m */; };
-		488E698517E489570055A908 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E698417E489570055A908 /* ReviewViewController.m */; };
 		48BD220717FC286E0093669F /* DriveInSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BD220617FC286E0093669F /* DriveInSessionViewController.m */; };
-		48EB0F0317FEAA2B0007E2E7 /* DriveDetailsSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */; };
+		48F99A1918351B9300F69672 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F99A1818351B9300F69672 /* ReviewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,12 +89,11 @@
 		488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Learner_Log_BookTests.m; sourceTree = "<group>"; };
 		488E68E017E47E3D0055A908 /* StartscreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartscreenViewController.h; sourceTree = "<group>"; };
 		488E68E117E47E3D0055A908 /* StartscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartscreenViewController.m; sourceTree = "<group>"; };
-		488E698317E489570055A908 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
-		488E698417E489570055A908 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		48BD220517FC286E0093669F /* DriveInSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveInSessionViewController.h; sourceTree = "<group>"; };
 		48BD220617FC286E0093669F /* DriveInSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveInSessionViewController.m; sourceTree = "<group>"; };
-		48EB0F0117FEAA2B0007E2E7 /* DriveDetailsSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriveDetailsSingleton.h; path = "Learner Log Book/DriveDetailsSingleton.h"; sourceTree = "<group>"; };
-		48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DriveDetailsSingleton.m; path = "Learner Log Book/DriveDetailsSingleton.m"; sourceTree = "<group>"; };
+		48F99A1718351B9300F69672 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		48F99A1818351B9300F69672 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		48F99A1A183545E800F69672 /* DriveRecordDeveloper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DriveRecordDeveloper.h; path = "Learner Log Book/DriveRecordDeveloper.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +129,6 @@
 				481B96351833D1A50095E93C /* DriveRecord.m */,
 				4835E09918337892000236DA /* DriveDetailContainer.h */,
 				4835E09A18337892000236DA /* DriveDetailContainer.m */,
-				48EB0F0117FEAA2B0007E2E7 /* DriveDetailsSingleton.h */,
-				48EB0F0217FEAA2B0007E2E7 /* DriveDetailsSingleton.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -152,6 +148,9 @@
 		488E689617E47DFA0055A908 = {
 			isa = PBXGroup;
 			children = (
+				48F99A1B183545EF00F69672 /* Protocols */,
+				48F99A1718351B9300F69672 /* ReviewViewController.h */,
+				48F99A1818351B9300F69672 /* ReviewViewController.m */,
 				488A053D1801550400B3DA2E /* Custom Cells */,
 				4835E09C1833789D000236DA /* Classes */,
 				488E68A817E47DFA0055A908 /* Learner Log Book */,
@@ -198,8 +197,6 @@
 				4824424317E48CAD002DC72A /* DriveViewController.m */,
 				488E68E017E47E3D0055A908 /* StartscreenViewController.h */,
 				488E68E117E47E3D0055A908 /* StartscreenViewController.m */,
-				488E698317E489570055A908 /* ReviewViewController.h */,
-				488E698417E489570055A908 /* ReviewViewController.m */,
 				488E68B117E47DFA0055A908 /* AppDelegate.h */,
 				488E68B217E47DFA0055A908 /* AppDelegate.m */,
 				488E68A917E47DFA0055A908 /* Supporting Files */,
@@ -239,6 +236,14 @@
 				488E68D217E47DFA0055A908 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		48F99A1B183545EF00F69672 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				48F99A1A183545E800F69672 /* DriveRecordDeveloper.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,12 +358,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				488E68AF17E47DFA0055A908 /* main.m in Sources */,
-				48EB0F0317FEAA2B0007E2E7 /* DriveDetailsSingleton.m in Sources */,
 				488E68B317E47DFA0055A908 /* AppDelegate.m in Sources */,
 				488A05461801650A00B3DA2E /* BinarySelectionCell.m in Sources */,
 				488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */,
-				488E698517E489570055A908 /* ReviewViewController.m in Sources */,
 				4824424417E48CAD002DC72A /* DriveViewController.m in Sources */,
+				48F99A1918351B9300F69672 /* ReviewViewController.m in Sources */,
 				488A053C1801544B00B3DA2E /* DriveCompletedDetailsViewController.m in Sources */,
 				486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */,
 				4835E09B18337892000236DA /* DriveDetailContainer.m in Sources */,

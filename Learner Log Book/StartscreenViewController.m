@@ -10,9 +10,18 @@
 
 @interface StartscreenViewController ()
 
+{
+    id unfinishedObjectToBeDeleted; //Deletes a managedobject with this id, which is disabled
+}
+
 @end
 
 @implementation StartscreenViewController
+
+- (void) defuseManagedObjectDeleter
+{
+    unfinishedObjectToBeDeleted = nil;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
 	// Do any additional setup after loading the view.
 }
 
@@ -34,6 +42,37 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    if (unfinishedObjectToBeDeleted) {
+        [[self managedObjectContext] deleteObject:unfinishedObjectToBeDeleted];
+    }
+}
+
+//Gets the managedObjectContext from the app delegate
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"toDriveScreenSegue"]) {
+        NSManagedObjectContext *context = [self managedObjectContext];
+        DriveRecord *newDriveRecord = (DriveRecord*)[NSEntityDescription insertNewObjectForEntityForName:@"DriveRecord" inManagedObjectContext:context];
+        DriveDetailContainer *newContainer = [[DriveDetailContainer alloc] init];
+        newDriveRecord.driveDetailContainer = newContainer;
+        UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
+        nextViewController.driveRecord = newDriveRecord;
+        
+        unfinishedObjectToBeDeleted = newDriveRecord;
+    }
 }
 
 @end
