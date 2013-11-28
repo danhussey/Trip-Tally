@@ -64,6 +64,7 @@
         tickPosition = CGRectMake(60, 0, 260, self.bounds.size.height);
         crossPosition = CGRectMake(0, 0, 260, self.bounds.size.height);
         
+        self.isFinishedCell = NO;
         self.dynamicView.textLabel.text = @"Unset";
         self.dynamicView = [[UITableViewCell alloc] initWithFrame:CGRectMake(60, 0, 260, self.bounds.size.height)];
         self.dynamicView.backgroundColor = [UIColor blueColor];

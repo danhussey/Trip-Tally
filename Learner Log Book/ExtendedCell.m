@@ -5,10 +5,12 @@
 //  Created by Daniel Hussey on 29/09/13.
 //  Copyright (c) 2013 Daniel Hussey. All rights reserved.
 //
+//  Tag 69 means editing already existant cell, 1984 is entering a new one
 
 //Note: Extended Cell is quite specialized to this logbook app
 //Stop scrolling, make it a stationary view
 //Add the swipe up to delete shit
+//Change all this database shit to updated version with driveRecord
 
 #import "ExtendedCell.h"
 
@@ -227,55 +229,6 @@
     return self;
 }
 
-- (void) handleTapFrom:(UISwipeGestureRecognizer *)recognizer
-{
-    if ([self isADriveDetailCell] && [self isInCustomDetailPosition]) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:self.textLabel.frame];
-        [textField setTag:69];
-        textField.text = self.textLabel.text;
-        self.textLabel.hidden = YES;
-        self.textLabel.userInteractionEnabled = NO;
-        textField.delegate = self;
-        textField.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:textField];
-        [[self.contentView viewWithTag:69] becomeFirstResponder]; //Begin editing immediately
-    }
-    
-    else if ([self isADriveDetailCell]) {
-        if([self.textLabel.text isEqualToString:[NSString stringWithFormat:@"Add New %@...", self.cellType]]) {
-            if (![self.contentView viewWithTag:1984]) { //If there isn't already a text box
-                //Add text box (Warning, it's invisible usually)
-                self.textLabel.hidden = YES;
-                UITextField *textField = [[UITextField alloc]initWithFrame:self.textLabel.frame];
-                textField.clearsOnBeginEditing = NO;
-                textField.delegate = self;
-                //textField.backgroundColor = [UIColor grayColor];
-                textField.tag = 1984;
-                textField.textAlignment = NSTextAlignmentCenter;
-                [self.contentView addSubview:textField];
-                [[self.contentView viewWithTag:1984] becomeFirstResponder];
-            }
-        }
-    }
-    else if ([self.cellType isEqualToString:@"Odometer"]) {
-        ExtendedCell *carCell = (ExtendedCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        if ([carCell isInCustomDetailPosition]) {
-            //Add text box (Warning, it's invisible usually)
-            UITextField *textField = [[UITextField alloc]initWithFrame:self.textLabel.frame];
-            textField.clearsOnBeginEditing = NO;
-            textField.text = [NSString stringWithFormat:@"%i",[self.textLabel.text integerValue]];
-            textField.delegate = self;
-            textField.keyboardType = UIKeyboardTypeNumberPad;
-            //textField.backgroundColor = [UIColor grayColor];
-            textField.tag = 1984;
-            textField.textAlignment = NSTextAlignmentCenter;
-            self.textLabel.hidden = YES;
-            [self.contentView addSubview:textField];
-            [[self.contentView viewWithTag:1984] becomeFirstResponder];
-        }
-    }
-}
-
 - (void) setupLabelTapRecognizer {
     if (![self.cellType  isEqual: @"Drive"]) {
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
@@ -295,23 +248,9 @@
     }
 }
 
-- (void) handleLabelTap
-{
-    if ([self isADriveDetailCell] && [self isInCustomDetailPosition]) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:self.textLabel.frame];
-        [textField setTag:69];
-        textField.text = self.textLabel.text;
-        textField.frame = self.textLabel.frame;
-        self.textLabel.hidden = YES;
-        self.textLabel.userInteractionEnabled = NO;
-        textField.delegate = self;
-        [self.contentView addSubview:textField];
-        [[self.contentView viewWithTag:69] becomeFirstResponder]; //Begin editing immediately
-    }
-}
-
 - (BOOL) textFieldShouldReturn: (UITextField *)textField
 {
+    if (textField.text == nil) textField.text = @"";
     if (textField.tag == 1984 && ![self.cellType isEqualToString:@"Odometer"]) [self addTextFieldToDatabase:textField];
     else if (textField.tag == 1984 && [self.cellType isEqualToString:@"Odometer"]) [self alterOdometerWithTextField:textField];
     else if (textField.tag == 69) [self editExistingDetailFromField:textField];
@@ -356,7 +295,9 @@
         }
         else NSLog(@"Error. editExistingDetail. No duplicate was found for the text in the cell.");
     }
-    else [self shakeView:self.contentView];
+    else {
+        [self deleteDetailFromStore:self.textLabel.text];
+    }
     self.textLabel.hidden = NO;
     self.textLabel.userInteractionEnabled = YES;
     [self updateCellContents];
@@ -420,6 +361,20 @@
     }
 }
 
+- (void) deleteDetailFromStore: (NSString*) detailName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:self.cellType];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey like %@", detailName]];
+    NSMutableArray *results = [[context executeFetchRequest:request error:nil] mutableCopy];
+    if (results.count == 1) {
+        [context deleteObject:results[0]];
+    }
+    else {
+        NSLog(@"ERROR: deleteDetailFromStore fetch results returned with count: %i", results.count);
+    }
+}
+
 - (void) dataDuplicateTriedToBeAdded {
     [self shakeView:self.contentView];
 }
@@ -430,6 +385,58 @@
     else {
         [self shakeView:self];
         return NO;
+    }
+}
+
+- (void) handleTapFrom:(UISwipeGestureRecognizer *)recognizer
+{
+    if ([self isADriveDetailCell] && [self isInCustomDetailPosition]) {
+        UITextField *textField = [[UITextField alloc] initWithFrame:self.textLabel.frame];
+        [textField setTag:69];
+        textField.text = self.textLabel.text;
+        self.textLabel.hidden = YES;
+        self.textLabel.userInteractionEnabled = NO;
+        textField.delegate = self;
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:textField];
+        [[self.contentView viewWithTag:69] becomeFirstResponder]; //Begin editing immediately
+    }
+    
+    else if ([self isADriveDetailCell]) {
+        if([self.textLabel.text isEqualToString:[NSString stringWithFormat:@"Add New %@...", self.cellType]]) {
+            if (![self.contentView viewWithTag:1984]) { //If there isn't already a text box
+                //Add text box (Warning, it's invisible usually)
+                self.textLabel.hidden = YES;
+                UITextField *textField = [[UITextField alloc]initWithFrame:self.textLabel.frame];
+                textField.clearsOnBeginEditing = NO;
+                textField.delegate = self;
+                //textField.backgroundColor = [UIColor grayColor];
+                textField.tag = 1984;
+                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+                textField.textAlignment = NSTextAlignmentCenter;
+                [self.contentView addSubview:textField];
+                [[self.contentView viewWithTag:1984] becomeFirstResponder];
+            }
+        }
+    }
+    else if ([self.cellType isEqualToString:@"Odometer"]) {
+        ExtendedCell *carCell = (ExtendedCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if ([carCell isInCustomDetailPosition]) {
+            //Add text box (Warning, it's invisible usually)
+            UITextField *textField = [[UITextField alloc]initWithFrame:self.textLabel.frame];
+            textField.clearsOnBeginEditing = NO;
+            textField.text = [NSString stringWithFormat:@"%i",[self.textLabel.text integerValue]];
+            textField.delegate = self;
+            textField.keyboardType = UIKeyboardTypeNumberPad;
+            //textField.backgroundColor = [UIColor grayColor];
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textField.tag = 1984;
+            textField.textAlignment = NSTextAlignmentCenter;
+            self.textLabel.hidden = YES;
+            [self.contentView addSubview:textField];
+            [[self.contentView viewWithTag:1984] becomeFirstResponder];
+        }
     }
 }
 

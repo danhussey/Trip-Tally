@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ggK-Tm-SXc">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -129,7 +129,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="HYq-go-SWJ">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HYq-go-SWJ" id="i46-GY-ysS">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -193,7 +193,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRI-R6-BVU">
                                 <rect key="frame" x="117" y="465" width="86" height="44"/>
-                                <color key="backgroundColor" patternImage="CFD8F5E9-3199-4B2D-98FC-E69345765CC7" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="08C020AD-787C-4691-8C7B-CE241CF4C12B" colorSpace="pattern"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Rvd-BS-WI5"/>
                                     <constraint firstAttribute="width" constant="86" id="xQy-NM-TPo"/>
@@ -310,7 +310,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CFD8F5E9-3199-4B2D-98FC-E69345765CC7" width="256" height="256">
+        <image name="08C020AD-787C-4691-8C7B-CE241CF4C12B" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4759,7 +4759,7 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="CPr-k2-VpK"/>
         <segue reference="Ctk-U1-uIo"/>
-        <segue reference="X0D-Cc-wba"/>
     </inferredMetricsTieBreakers>
 </document>

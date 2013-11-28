@@ -18,7 +18,8 @@
     }
     self.driver = [aDecoder decodeObjectForKey:@"driver"];
     self.supervisor = [aDecoder decodeObjectForKey:@"supervisor"];
-    self.odometer = [aDecoder decodeObjectForKey:@"odometer"];
+    self.odometerStart = [aDecoder decodeObjectForKey:@"odometerStart"];
+    self.odometerFinish = [aDecoder decodeObjectForKey:@"odometerFinish"];
     self.car = [aDecoder decodeObjectForKey:@"car"];
     self.driveCompletionBinaryDetails = [aDecoder decodeObjectForKey:@"driveCompletionBinaryDetails"];
     self.startDate = [aDecoder decodeObjectForKey:@"startDate"];
@@ -26,8 +27,6 @@
     
     self.elapsedTime = [aDecoder decodeIntegerForKey:@"elapsedTime"];
     self.distanceTravelled = [aDecoder decodeIntegerForKey:@"distanceTravelled"];
-    
-    NSLog(@"fuck");
     
     return self;
 }
@@ -38,15 +37,14 @@
 {
     [aCoder encodeObject:self.driver forKey:@"driver"];
     [aCoder encodeObject:self.supervisor forKey:@"supervisor"];
-    [aCoder encodeObject:self.odometer forKey:@"odometer"];
+    [aCoder encodeObject:self.odometerStart forKey:@"odometerStart"];
+    [aCoder encodeObject:self.odometerFinish forKey:@"odometerFinish"];
     [aCoder encodeObject:self.car forKey:@"car"];
     [aCoder encodeObject:self.driveCompletionBinaryDetails forKey:@"driveCompletionBinaryDetails"];
     [aCoder encodeObject:self.startDate forKey:@"startDate"];
     [aCoder encodeObject:self.endDate forKey:@"endDate"];
     [aCoder encodeInteger:self.elapsedTime forKey:@"elapsedTime"];
     [aCoder encodeInteger:self.distanceTravelled forKey:@"distanceTravelled"];
-    
-    NSLog(@"shit");
 }
 
 

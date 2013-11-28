@@ -9,6 +9,7 @@
 		<string>Weather</string>
 		<string>Road</string>
 		<string>Light</string>
+		<string>Finished</string>
 	</array>
 	<key>P</key>
 	<array>
@@ -117,6 +118,15 @@
 		<dict>
 			<key>Title</key>
 			<string>Night</string>
+			<key>Value</key>
+			<false/>
+		</dict>
+	</array>
+	<key>Finished</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Finished</string>
 			<key>Value</key>
 			<false/>
 		</dict>

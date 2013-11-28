@@ -28,7 +28,6 @@
 - (id)transformedValue:(id)value {
         DriveDetailContainer *container = value;
         NSData *dataContainer = [NSKeyedArchiver archivedDataWithRootObject:container];
-        NSLog(@"DEEPFLAG");
         return dataContainer;
 }
 
@@ -36,7 +35,6 @@
 - (id)reverseTransformedValue:(id)value {
     NSData *dataContainer = value;
     DriveDetailContainer *container = [NSKeyedUnarchiver unarchiveObjectWithData:dataContainer];
-    NSLog(@"DEEPER     FLAG");
     return container;
 }
 

@@ -91,8 +91,8 @@
 		488E68E117E47E3D0055A908 /* StartscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartscreenViewController.m; sourceTree = "<group>"; };
 		48BD220517FC286E0093669F /* DriveInSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveInSessionViewController.h; sourceTree = "<group>"; };
 		48BD220617FC286E0093669F /* DriveInSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveInSessionViewController.m; sourceTree = "<group>"; };
-		48F99A1718351B9300F69672 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
-		48F99A1818351B9300F69672 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		48F99A1718351B9300F69672 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReviewViewController.h; path = ../ReviewViewController.h; sourceTree = "<group>"; };
+		48F99A1818351B9300F69672 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReviewViewController.m; path = ../ReviewViewController.m; sourceTree = "<group>"; };
 		48F99A1A183545E800F69672 /* DriveRecordDeveloper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DriveRecordDeveloper.h; path = "Learner Log Book/DriveRecordDeveloper.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,8 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				48F99A1B183545EF00F69672 /* Protocols */,
-				48F99A1718351B9300F69672 /* ReviewViewController.h */,
-				48F99A1818351B9300F69672 /* ReviewViewController.m */,
 				488A053D1801550400B3DA2E /* Custom Cells */,
 				4835E09C1833789D000236DA /* Classes */,
 				488E68A817E47DFA0055A908 /* Learner Log Book */,
@@ -187,6 +185,8 @@
 			children = (
 				488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */,
 				486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */,
+				48F99A1718351B9300F69672 /* ReviewViewController.h */,
+				48F99A1818351B9300F69672 /* ReviewViewController.m */,
 				4835E09D18337ACA000236DA /* RecentDriveReviewViewController.h */,
 				4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */,
 				488A053A1801544B00B3DA2E /* DriveCompletedDetailsViewController.h */,
@@ -293,6 +293,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Daniel Hussey";
+				TargetAttributes = {
+					488E689E17E47DFA0055A908 = {
+						DevelopmentTeam = 62P7RYT23F;
+					};
+				};
 			};
 			buildConfigurationList = 488E689A17E47DFA0055A908 /* Build configuration list for PBXProject "Learner Log Book" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -480,11 +485,14 @@
 		488E68DB17E47DFA0055A908 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
 				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -493,11 +501,14 @@
 		488E68DC17E47DFA0055A908 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Learner Log Book/Learner Log Book-Prefix.pch";
 				INFOPLIST_FILE = "Learner Log Book/Learner Log Book-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

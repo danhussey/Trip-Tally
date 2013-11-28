@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *finishedButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *recordedLocationsArray;
+@property (strong, nonatomic) NSMutableArray *locationHistory;
 
 @property (strong, nonatomic) DriveRecord *driveRecord;
 

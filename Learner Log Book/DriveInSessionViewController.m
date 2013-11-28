@@ -10,6 +10,13 @@
 
 #import "DriveInSessionViewController.h"
 
+#define kDistanceCalculationInterval 10 // the interval (seconds) at which we calculate the user's distance
+#define kNumLocationHistoriesToKeep 5 // the number of locations to store in history so that we can look back at them and determine which is most accurate
+#define kValidLocationHistoryDeltaInterval 3 // the maximum valid age in seconds of a location stored in the location history
+#define kMinLocationsNeededToUpdateDistance 3 // the number of locations needed in history before we will even update the current distance
+#define kRequiredHorizontalAccuracy 30.0f // the required accuracy in meters for a location.  anything above this number will be discarded
+
+
 @interface DriveInSessionViewController ()
 {
     //Timer stuff
@@ -24,15 +31,21 @@
 
 @implementation DriveInSessionViewController
 
+- (NSMutableArray*) recordedLocationsArray {
+    if (!_recordedLocationsArray) {
+        _recordedLocationsArray = [[NSMutableArray alloc] init];
+    }
+    return _recordedLocationsArray;
+}
+
 - (CLLocationManager*) locationManager
 {
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.pausesLocationUpdatesAutomatically = NO; //Look into this
-        _locationManager.distanceFilter = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters; //Check this, could cause issues later for accuracy
+        _locationManager.distanceFilter = 5;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
         _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
-        _locationManager.headingFilter = 25; //Degrees
         _locationManager.delegate = self;
     }
     return _locationManager;
@@ -54,18 +67,22 @@
 
 - (IBAction)doFinishedButton:(UIButton *)sender {
     self.driveRecord.driveDetailContainer.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
+    int distanceInKilometres = (int)self.driveRecord.driveDetailContainer.distanceTravelled/1000;
+    self.driveRecord.driveDetailContainer.odometerFinish = [NSNumber numberWithInt:[self.driveRecord.driveDetailContainer.odometerStart intValue] + distanceInKilometres];
     self.driveRecord.driveDetailContainer.endDate = [NSDate date];
+    self.driveRecord.driveDetailContainer.elapsedTime = [self.driveRecord.driveDetailContainer.endDate timeIntervalSinceDate:self.driveRecord.driveDetailContainer.startDate];
 }
 
 - (CLLocationDistance)distanceTravelledFromLocations:(NSMutableArray*)locations
 {
-    CLLocationDistance totalDistance = 0;
-    if (locations) {
+    CLLocationDistance totalDistance;
+    if (locations.count > 0) {
+        totalDistance = 0;
         for (int i=0; i < (locations.count-1); i++) {
             totalDistance += ([locations[i] distanceFromLocation:locations[i+1]]);
         }
     }
-    else if (!locations) {
+    else {
         NSLog(@"Locations array = nil");
     }
     return totalDistance;
@@ -80,6 +97,8 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,13 +106,13 @@
     [self setupTimer];
     [self startTimer]; //View only loads once... right?
     self.driveRecord.driveDetailContainer.startDate = [NSDate date];
-    
     switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusNotDetermined:
         case kCLAuthorizationStatusAuthorized:
         {
-            if ([CLLocationManager headingAvailable] && [CLLocationManager locationServicesEnabled]) { //NOTE: Do further checks later and handle non-enabled events (Authorizationstatus checks and stuff)
+            if ([CLLocationManager locationServicesEnabled]) { //NOTE: Do further checks later and handle non-enabled events (Authorizationstatus checks and stuff)
+                self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];
                 [self.locationManager startUpdatingLocation];
-                [self.locationManager startUpdatingHeading];
             }
         }
             break;
@@ -101,18 +120,48 @@
         {
             //Well shit. Maybe like do odometer calculations if they want?
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
-                                                           message:@"Can't calculate distance travelled - Location Services Disabled"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Cancel"
-                                                 otherButtonTitles:@"Okay", nil];
+                                                            message:@"Can't calculate distance travelled - Location Services Disabled"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Okay", nil];
             [alert show];
         }
             
         default:
+            NSLog(@"ERROR: Location authorization status is %i", [CLLocationManager authorizationStatus]);
             break;
     }
     
 	// Do any additional setup after loading the view.
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    switch ([CLLocationManager authorizationStatus]) {
+            case kCLAuthorizationStatusNotDetermined:
+            case kCLAuthorizationStatusAuthorized:
+        {
+            if ([CLLocationManager locationServicesEnabled]) { //NOTE: Do further checks later and handle non-enabled events (Authorizationstatus checks and stuff)
+                self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];
+                [self.locationManager startUpdatingLocation];
+            }
+        }
+            break;
+            case kCLAuthorizationStatusDenied:
+        {
+            //Well shit. Maybe like do odometer calculations if they want?
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
+                                                            message:@"Can't calculate distance travelled - Location Services Disabled"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Okay", nil];
+            [alert show];
+        }
+            
+        default:
+            NSLog(@"ERROR: Location authorization status is %i", [CLLocationManager authorizationStatus]);
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,33 +224,36 @@
     running = false;
 }
 
-- (void) locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
-{
-    readyToRecordLocation = true;
-    //Could possibly implement optimization here where location isn't updated unless this value is true
-}
-
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    if (readyToRecordLocation == true) {
         for (id element in locations) {
             CLLocation *location;
             if ([element isKindOfClass:[CLLocation class]]) location = element;
             NSDate *currentTime = [NSDate date];
             NSTimeInterval locationThreshhold = (60*5); //60 seconds (a minutes) times 30
-            if ([currentTime timeIntervalSinceDate:location.timestamp] <= locationThreshhold) {
-                [self.recordedLocationsArray addObjectsFromArray:locations];
+            if ([currentTime timeIntervalSinceDate:location.timestamp] <= locationThreshhold && location.horizontalAccuracy < kRequiredHorizontalAccuracy) {
+                [self.recordedLocationsArray addObject:location];
                 //For each element in the locations array, if it's a location assign it to the location variable, and if its timestamp is less than 5 minutes old, add the location to the recorded locations array property
+                NSLog(@"%@", location.description);
             }
         }
-        readyToRecordLocation = NO; //Reset the corner-turned flag
-    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self.locationManager stopUpdatingHeading];
     [self.locationManager stopUpdatingLocation];
+}
+
+- (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString: @"toDriveCompletedSegue"]) {
+        if (self.recordedLocationsArray.count > 0) {
+            return YES;
+        }
+        else return NO;
+    }
+    else return YES;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

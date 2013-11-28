@@ -188,7 +188,7 @@
         if ([cell.cellType isEqualToString:@"Car"]) self.driveRecord.driveDetailContainer.car = cell.textLabel.text;
         else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.textLabel.text;
         else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometer = cell.textLabel.text;
+        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
     }
 }
 

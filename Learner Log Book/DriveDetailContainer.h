@@ -11,7 +11,8 @@
 
 @interface DriveDetailContainer : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSString *driver, *supervisor, *car, *odometer;
+@property (strong, nonatomic) NSString *driver, *supervisor, *car;
+@property (strong, nonatomic) NSNumber *odometerStart, *odometerFinish;
 @property (nonatomic) NSTimeInterval elapsedTime;
 @property (nonatomic) CLLocationDistance distanceTravelled;
 @property (strong, nonatomic) NSDictionary *driveCompletionBinaryDetails;

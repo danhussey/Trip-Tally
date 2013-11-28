@@ -21,13 +21,17 @@
 {
     if ([sender.title isEqualToString:@"Save"]) {
         NSManagedObjectContext *context = [self managedObjectContext];
+        NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Car"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey like %@", self.driveRecord.driveDetailContainer.car]];
+        NSArray *results = [context executeFetchRequest:request error:nil];
+        [results.firstObject setValue:self.driveRecord.driveDetailContainer.odometerFinish forKey:@"odometer"];
         NSError *error = nil;
         // Save the object to persistent store
         if (![context save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
         [self.navigationController.viewControllers[0] performSelector:@selector(defuseManagedObjectDeleter)];
-        //Add metres to the odometer (Futile, I know, but I might as well)
+        
         //NOTE: Update when the singleton has been changed to an instance of DriveRecord
         
     }
@@ -81,7 +85,7 @@
         self.topRightNavButton.title = nil;
     }
     
-    NSString *string = [NSString stringWithFormat:@"Date and time: %@\nDriving Time: %f\n Odometer Start: %i \nOdometer Finish: %f\n And all this stuff: %@", self.driveRecord.driveDetailContainer.startDate.description, self.driveDetails.elapsedTime, self.driveRecord.driveDetailContainer.odometer.intValue, (self.driveRecord.driveDetailContainer.odometer.intValue + self.driveRecord.driveDetailContainer.distanceTravelled), self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails.description];
+    NSString *string = [NSString stringWithFormat:@"Date and time: %@\nDriving Time: %f\n Odometer Start: %i \nOdometer Finish: %i\n And all this stuff: %@", self.driveRecord.driveDetailContainer.startDate.description, self.driveDetails.elapsedTime, self.driveRecord.driveDetailContainer.odometerStart.intValue, self.driveRecord.driveDetailContainer.odometerFinish.intValue, self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails.description];
     self.detailsTextBox.text = string;
 }
 
