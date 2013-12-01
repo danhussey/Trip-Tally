@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "ExtendedCell.h"
+#import "DriveDetailCell.h"
 #import "DriveRecordDeveloper.h"
 
 @interface DriveViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, DriveRecordDeveloper>

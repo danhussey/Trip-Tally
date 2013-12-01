@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *cellType;
 @property (nonatomic) CGPoint cellPosition;
 @property (strong, nonatomic) NSMutableArray *cellData;
+@property (strong, nonatomic) UITextField *detailField;
 
 - (void) handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer;
 - (void) handleTapFrom:(UISwipeGestureRecognizer *)recognizer;

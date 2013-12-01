@@ -45,8 +45,6 @@
     //Adding cell's title to the start of array, and the add new cell to the end of the array
     [dataArray insertObject:self.cellType atIndex:0];
     [dataArray addObject:[NSString stringWithFormat:@"Add New %@...", self.cellType]]; //Add addnew title onto the data array end
-    //NSLog(@"Data Array Fetched: %@",dataArray.description);
-    //NSLog(@"Cell Data array before assignment %@", _cellData.description);
     _cellData = dataArray;
     return _cellData;
 }
@@ -66,16 +64,24 @@
     self.cellPosition = CGPointMake([defaults integerForKey:self.cellType], 0.0);
     
     //Maybe pur this somewhere else dude
-    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    //self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.hidden = YES;
+    self.textLabel.userInteractionEnabled = NO;
+    
+    //Setting up txt field
+    self.detailField = [[UITextField alloc] initWithFrame:self.textLabel.frame];
+    self.detailField.backgroundColor = [UIColor greenColor];
+    self.detailField.delegate = self;
 }
 
 - (void) updateCellContents
 {
     if ([[self.cellData objectAtIndex:self.cellPosition.x] isKindOfClass:[NSManagedObject class]]) {
-        self.textLabel.text = [[self.cellData objectAtIndex:self.cellPosition.x] valueForKey:@"generalKey"];
+        self.detailField.text = [[self.cellData objectAtIndex:self.cellPosition.x] valueForKey:@"generalKey"];
     }
     else if ([[self.cellData objectAtIndex:self.cellPosition.x] isKindOfClass:[NSString class]]) {
-        self.textLabel.text = [self.cellData objectAtIndex:self.cellPosition.x]; //If the object is just a string
+        self.detailField.text = [self.cellData objectAtIndex:self.cellPosition.x]; //If the object is just a string
     }
     [self updateOdometerCell];
 }
@@ -86,7 +92,7 @@
         if ([carCell isInCustomDetailPosition]) {
             NSManagedObject *car = [carCell.cellData objectAtIndex:carCell.cellPosition.x];
             int odometer = (int)[[car valueForKey:@"odometer"] intValue];
-            odometerCell.textLabel.text = [NSString stringWithFormat:@"%i KM", odometer];
+            odometerCell.detailField.text = [NSString stringWithFormat:@"%i KM", odometer];
         }
         else odometerCell.textLabel.text = @"Odometer";
     if (self.textLabel.hidden) self.textLabel.hidden = NO;
@@ -115,11 +121,11 @@
     if (direction == UISwipeGestureRecognizerDirectionLeft) transitionView.frame = rightOfCurrentFrame;
     else if (direction == UISwipeGestureRecognizerDirectionRight) transitionView.frame = leftOfCurrentFrame;
     transitionView.backgroundView = self.backgroundView;
-    transitionView.textLabel.textAlignment = NSTextAlignmentCenter;
+    transitionView.detailField.textAlignment = NSTextAlignmentCenter;
     [tableView addSubview:transitionView];
     
     if ([[self.cellData objectAtIndex:self.cellPosition.x] isKindOfClass:[NSManagedObject class]]) {
-        transitionView.textLabel.text = [[self.cellData objectAtIndex:self.cellPosition.x] valueForKey:@"generalKey"];
+        transitionView.detailField.text = [[self.cellData objectAtIndex:self.cellPosition.x] valueForKey:@"generalKey"];
         [UIView animateWithDuration:0.15
                          animations:^{if (direction == UISwipeGestureRecognizerDirectionLeft) {self.frame = leftOfCurrentFrame;}
                          else {self.frame = rightOfCurrentFrame;}
@@ -128,23 +134,23 @@
          
                          completion:^(BOOL finished) {
                              if (finished) {
-                                 self.textLabel.text = transitionView.textLabel.text;
+                                 self.detailField.text = transitionView.detailField.text;
                                  self.frame = transitionView.frame;
                                  [transitionView removeFromSuperview];
                              }
                          }];
     }
     else if ([[self.cellData objectAtIndex:self.cellPosition.x] isKindOfClass:[NSString class]]) {
-        transitionView.textLabel.text = [self.cellData objectAtIndex:self.cellPosition.x];
-        [UIView animateWithDuration:0.15
-                         animations:^{if (direction == UISwipeGestureRecognizerDirectionLeft) {self.frame =leftOfCurrentFrame;}
+        transitionView.detailField.text = [self.cellData objectAtIndex:self.cellPosition.x];
+        [UIView animateWithDuration:2
+                         animations:^{if (direction == UISwipeGestureRecognizerDirectionLeft) {self.frame = leftOfCurrentFrame;}
                          else {self.frame = rightOfCurrentFrame;}
                              transitionView.frame = originalFrame;
                          }
          
                          completion:^(BOOL finished) {
                              if (finished) {
-                                 self.textLabel.text = transitionView.textLabel.text;
+                                 self.detailField.text = transitionView.detailField.text;
                                  self.frame = transitionView.frame;
                                  [transitionView removeFromSuperview];
                              }
@@ -200,12 +206,6 @@
         recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
         
         if ([self isADriveDetailCell]) {
-            if ([self.contentView viewWithTag:1984]) [[self.contentView viewWithTag:1984] removeFromSuperview]; //Get rid of text box if it's there before any cell movement
-            else if ([self.contentView viewWithTag:69]) {
-                [[self.contentView viewWithTag:69] removeFromSuperview];
-                self.textLabel.hidden = NO;
-                self.textLabel.userInteractionEnabled = YES;
-            }
             [self incrementCellPositionInDirection:recognizer.direction]; //Note: What will happen with a down or up gesture...??
         }
     }
@@ -250,35 +250,26 @@
 
 - (BOOL) textFieldShouldReturn: (UITextField *)textField
 {
-    if (textField.text == nil) textField.text = @"";
-    if (textField.tag == 1984 && ![self.cellType isEqualToString:@"Odometer"]) [self addTextFieldToDatabase:textField];
-    else if (textField.tag == 1984 && [self.cellType isEqualToString:@"Odometer"]) [self alterOdometerWithTextField:textField];
-    else if (textField.tag == 69) [self editExistingDetailFromField:textField];
-    [textField removeFromSuperview]; //Get rid of text box
+    if (![self isInCustomDetailPosition] && ![self.cellType isEqualToString:@"Odometer"]) [self addTextFieldToDatabase:textField];
+    else if ([self.cellType isEqualToString:@"Odometer"]) [self alterOdometerWithTextField:textField];
+    else if ([self isInCustomDetailPosition]) [self editExistingDetailFromField:textField];
     [self updateCellContents];
     [self endEditing:YES];
+    NSLog(@"End Editing NOOOOW");
     
-    return YES;
-}
-
-- (BOOL) textFieldShouldEndEditing:(UITextField *)textField
-{
-    [textField removeFromSuperview]; //Get rid of text box
-    if (self.textLabel.hidden) self.textLabel.hidden = NO;
     return YES;
 }
 
 - (void) editExistingDetailFromField: (UITextField *)textField
 {
+    NSString *detailBeingEdited = [self textAtCellPosition:self.cellPosition.x];
     if (![textField.text isEqualToString:@""]) {
-        if ([self hasDuplicateInDatabase:self.textLabel.text])
-        {
             NSLog(@"Currently editing %@", self.textLabel.text);
             NSManagedObjectContext *context = [self managedObjectContext]; //Create context
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *description = [NSEntityDescription entityForName:self.cellType inManagedObjectContext:context];
             [fetchRequest setEntity:description];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"generalKey == %@",self.textLabel.text];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"generalKey == %@", detailBeingEdited];
             [fetchRequest setPredicate:predicate];
             NSError *error;
             NSArray *array = [context executeFetchRequest:fetchRequest error:&error];
@@ -290,16 +281,13 @@
             // Save the object to persistent store
             if (![context save:&error]) {
                 NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-            }
             
         }
         else NSLog(@"Error. editExistingDetail. No duplicate was found for the text in the cell.");
     }
     else {
-        [self deleteDetailFromStore:self.textLabel.text];
+        [self deleteDetailFromStore:[self textAtCellPosition:self.cellPosition.x]];
     }
-    self.textLabel.hidden = NO;
-    self.textLabel.userInteractionEnabled = YES;
     [self updateCellContents];
 }
 

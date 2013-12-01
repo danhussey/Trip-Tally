@@ -80,6 +80,10 @@
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    //Setup custon cell XIBs
+    UINib *nib = [UINib nibWithNibName:@"DriveDetailCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"DriveDetailCell"];
+    
     tableData = [NSMutableArray arrayWithObjects:@"Car", @"Driver", @"Supervisor", @"Odometer", @"Drive", nil];
     
     [self setInitialDefaults]; //Set the initial default positions
@@ -120,21 +124,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tableData count];
+    return [tableData count] - 2;
 }
 
-- (ExtendedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    ExtendedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"DriveDetailCell";
+    DriveDetailCell *cell = (DriveDetailCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == Nil) {
+        cell = [[DriveDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
-    //Sets the properties as the cells are made
-    //cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
     cell.cellType = [tableData objectAtIndex:indexPath.row];
-    [cell setCellPositionToDefault];
-    [cell updateCellContents];
-    [cell setupLabelTapRecognizer];
-    //NSLog(@"Cell %@ is in position %i after setting default.", cell.cellType, cell.cellPosition.x);
     
     return cell;
 }
@@ -145,15 +146,14 @@
     UITableView *tableView = [self tableView];
     CGPoint location = [recognizer locationInView:self.view];
     NSIndexPath *swipedIndexPath = [tableView indexPathForRowAtPoint:location];
-    ExtendedCell *swipedCell  = (ExtendedCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
+    DriveDetailCell *swipedCell  = (DriveDetailCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
     
-    [swipedCell handleSwipeFrom:recognizer];
+    [swipedCell handleSwipeFromTableViewRecognizer:recognizer];
 }
 
 - (void) handleTapFrom:(UISwipeGestureRecognizer *)recognizer
 {
     NSLog(@"Tableview Tapped");
-    [self becomeFirstResponder];
     //Find cell the tap happened on
     UITableView *tableView = [self tableView];
     CGPoint location = [recognizer locationInView:self.view];
@@ -163,31 +163,32 @@
     //This is some terrible programming.
     if ([tappedCell.cellType isEqualToString:@"Drive"]) //If it's the drive button
     {
-        BOOL readyForDrive = YES;
-        
-        for (int i = 0; i < 4; i++) {
-            ExtendedCell *cell = (ExtendedCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            if (!cell.cellIsReadyForSegue) readyForDrive = NO;
-        }
-        
-        if (readyForDrive) {
+        if ([self cellsAreReadyForSegue]) {
             for (int i = 0; i < 4; i++) {
-                ExtendedCell *cell = (ExtendedCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                DriveDetailCell *cell = (DriveDetailCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 [self synchroniseDataToManagedObjectFromCell:cell];
             }
             [self performSegueWithIdentifier:@"toDriveInSessionSegue" sender:tappedCell];
         }
     }
-    
-    else [tappedCell handleTapFrom:recognizer];
 }
 
-- (void) synchroniseDataToManagedObjectFromCell:(ExtendedCell *)cell
+- (BOOL) cellsAreReadyForSegue {
+    BOOL readyForDrive = YES;
+    
+    for (int i = 0; i < 4; i++) {
+        DriveDetailCell *cell = (DriveDetailCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if (![cell isReadyForSegue]) readyForDrive = NO;
+    }
+    if (readyForDrive) return YES;
+}
+
+- (void) synchroniseDataToManagedObjectFromCell:(DriveDetailCell *)cell
 {
     if ([cell isInCustomDetailPosition]) {
-        if ([cell.cellType isEqualToString:@"Car"]) self.driveRecord.driveDetailContainer.car = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.textLabel.text;
-        else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.textLabel.text;
+        if ([cell.cellType isEqualToString:@"Car"]) self.driveRecord.driveDetailContainer.car = cell.detailField.text;
+        else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.detailField.text;
+        else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.detailField.text;
         else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
     }
 }

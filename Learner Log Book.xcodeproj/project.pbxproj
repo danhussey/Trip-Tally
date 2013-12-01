@@ -13,6 +13,8 @@
 		4835E094183134DD000236DA /* vicCriteria.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4835E093183134DD000236DA /* vicCriteria.plist */; };
 		4835E09B18337892000236DA /* DriveDetailContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4835E09A18337892000236DA /* DriveDetailContainer.m */; };
 		4835E09F18337ACA000236DA /* RecentDriveReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */; };
+		484EE5CC1848B41400C5EEFA /* DriveDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */; };
+		484EE5CF1848B73F00C5EEFA /* DriveDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */; };
 		486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */; };
 		486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486BD58617F6C5C100E38172 /* CoreData.framework */; };
 		486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5BD17F8521E00E38172 /* ExtendedCell.m */; };
@@ -59,6 +61,9 @@
 		4835E09A18337892000236DA /* DriveDetailContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DriveDetailContainer.m; path = "Learner Log Book/DriveDetailContainer.m"; sourceTree = "<group>"; };
 		4835E09D18337ACA000236DA /* RecentDriveReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDriveReviewViewController.h; sourceTree = "<group>"; };
 		4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDriveReviewViewController.m; sourceTree = "<group>"; };
+		484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriveDetailCell.xib; sourceTree = "<group>"; };
+		484EE5CD1848B73F00C5EEFA /* DriveDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveDetailCell.h; sourceTree = "<group>"; };
+		484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveDetailCell.m; sourceTree = "<group>"; };
 		486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learner_Log_Book.xcdatamodel; sourceTree = "<group>"; };
 		486BD58617F6C5C100E38172 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		486BD5BC17F8521E00E38172 /* ExtendedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedCell.h; sourceTree = "<group>"; };
@@ -136,6 +141,9 @@
 		488A053D1801550400B3DA2E /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				484EE5CD1848B73F00C5EEFA /* DriveDetailCell.h */,
+				484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */,
+				484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */,
 				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
 				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
 				486BD5BC17F8521E00E38172 /* ExtendedCell.h */,
@@ -326,6 +334,7 @@
 				488E68B517E47DFA0055A908 /* Default.png in Resources */,
 				4835E094183134DD000236DA /* vicCriteria.plist in Resources */,
 				488E68B717E47DFA0055A908 /* Default@2x.png in Resources */,
+				484EE5CC1848B41400C5EEFA /* DriveDetailCell.xib in Resources */,
 				488E68B917E47DFA0055A908 /* Default-568h@2x.png in Resources */,
 				488E68BC17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
@@ -365,6 +374,7 @@
 				488E68AF17E47DFA0055A908 /* main.m in Sources */,
 				488E68B317E47DFA0055A908 /* AppDelegate.m in Sources */,
 				488A05461801650A00B3DA2E /* BinarySelectionCell.m in Sources */,
+				484EE5CF1848B73F00C5EEFA /* DriveDetailCell.m in Sources */,
 				488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */,
 				4824424417E48CAD002DC72A /* DriveViewController.m in Sources */,
 				48F99A1918351B9300F69672 /* ReviewViewController.m in Sources */,
