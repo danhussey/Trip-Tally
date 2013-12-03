@@ -22,7 +22,7 @@
     if ([sender.title isEqualToString:@"Save"]) {
         NSManagedObjectContext *context = [self managedObjectContext];
         NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Car"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey like %@", self.driveRecord.driveDetailContainer.car]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey == %@", self.driveRecord.driveDetailContainer.car]];
         NSArray *results = [context executeFetchRequest:request error:nil];
         [results.firstObject setValue:self.driveRecord.driveDetailContainer.odometerFinish forKey:@"odometer"];
         NSError *error = nil;

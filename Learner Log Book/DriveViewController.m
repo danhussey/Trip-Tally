@@ -44,11 +44,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     for (int i = 0; i<2;i++) { //Cycle through !!first three!! cells and set defaults as their current positions
-        ExtendedCell *cell = (ExtendedCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        DriveDetailCell *cell = (DriveDetailCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
-        if (cell.cellPosition.x != cell.cellData.count-1 && cell.cellPosition.y == 0.0) {
-        [defaults setObject:[NSNumber numberWithInt:cell.cellPosition.x] forKey:cell.cellType];
-        }
         
         NSLog(@"Cell %@ default is now %i after setting it.", cell.cellType, [defaults integerForKey:cell.cellType]);
     }
@@ -124,19 +121,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tableData count] - 2;
+    return [tableData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 4) {//The drive cell
+        NSString *driveCellIdentifier = @"DriveCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:driveCellIdentifier forIndexPath:indexPath];
+        cell.textLabel.text = @"Drive";
+        return cell;
+    }
     static NSString *CellIdentifier = @"DriveDetailCell";
     DriveDetailCell *cell = (DriveDetailCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == Nil) {
         cell = [[DriveDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
+        }
     cell.cellType = [tableData objectAtIndex:indexPath.row];
-    
+    cell.tableView = self.tableView;
+    if ([cell.cellType isEqualToString:@"Odometer"]) cell.detailField.text = cell.cellType;
     return cell;
 }
 
@@ -148,7 +151,10 @@
     NSIndexPath *swipedIndexPath = [tableView indexPathForRowAtPoint:location];
     DriveDetailCell *swipedCell  = (DriveDetailCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
     
-    [swipedCell handleSwipeFromTableViewRecognizer:recognizer];
+    if ([swipedCell respondsToSelector:@selector(handleSwipeFromTableViewRecognizer:)]) {
+        NSLog(@"Responds to swipe selector");
+        [swipedCell handleSwipeFromTableViewRecognizer:recognizer];
+    }
 }
 
 - (void) handleTapFrom:(UISwipeGestureRecognizer *)recognizer
@@ -158,10 +164,10 @@
     UITableView *tableView = [self tableView];
     CGPoint location = [recognizer locationInView:self.view];
     NSIndexPath *swipedIndexPath = [tableView indexPathForRowAtPoint:location];
-    ExtendedCell *tappedCell  = (ExtendedCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
+    UITableViewCell *tappedCell  = [tableView cellForRowAtIndexPath:swipedIndexPath];
     
     //This is some terrible programming.
-    if ([tappedCell.cellType isEqualToString:@"Drive"]) //If it's the drive button
+    if ([tappedCell.textLabel.text isEqualToString:@"Drive"]) //If it's the drive button
     {
         if ([self cellsAreReadyForSegue]) {
             for (int i = 0; i < 4; i++) {
@@ -181,6 +187,7 @@
         if (![cell isReadyForSegue]) readyForDrive = NO;
     }
     if (readyForDrive) return YES;
+    return NO;
 }
 
 - (void) synchroniseDataToManagedObjectFromCell:(DriveDetailCell *)cell
@@ -190,6 +197,9 @@
         else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.detailField.text;
         else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.detailField.text;
         else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
+        NSError *error = nil;
+        [[self managedObjectContext] save:&error];
+        if (error) NSLog(@"error: %@", error.localizedDescription);
     }
 }
 
@@ -211,13 +221,13 @@
 
 /*
  // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(ExtendedCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(DriveDetailCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
  {
- if (editingStyle == ExtendedCellEditingStyleDelete) {
+ if (editingStyle == DriveDetailCellEditingStyleDelete) {
  // Delete the row from the data source
  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
  }
- else if (editingStyle == ExtendedCellEditingStyleInsert) {
+ else if (editingStyle == DriveDetailCellEditingStyleInsert) {
  // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
  }
  }

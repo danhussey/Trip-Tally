@@ -103,7 +103,8 @@
     
     // Configure the cell...
     //NOTE: Maybe for later - cells that extend downards to show the drive details
-    NSString *driveDate = [[[self.containerArray[indexPath.row] driveDetailContainer] startDate] descriptionWithLocale:[NSLocale currentLocale]];
+    DriveDetailContainer *cellDriveRecord = [self.containerArray[indexPath.row] driveDetailContainer];
+    NSString *driveDate = cellDriveRecord.startDate.description;
     cell.textLabel.text = driveDate;
     
     return cell;

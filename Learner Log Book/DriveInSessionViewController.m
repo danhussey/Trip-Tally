@@ -76,8 +76,8 @@
 - (CLLocationDistance)distanceTravelledFromLocations:(NSMutableArray*)locations
 {
     CLLocationDistance totalDistance;
+    totalDistance = 0;
     if (locations.count > 0) {
-        totalDistance = 0;
         for (int i=0; i < (locations.count-1); i++) {
             totalDistance += ([locations[i] distanceFromLocation:locations[i+1]]);
         }

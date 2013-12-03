@@ -11,6 +11,7 @@
 //Stop scrolling, make it a stationary view
 //Add the swipe up to delete shit
 //Change all this database shit to updated version with driveRecord
+/*
 
 #import "ExtendedCell.h"
 
@@ -98,16 +99,6 @@
     if (self.textLabel.hidden) self.textLabel.hidden = NO;
 }
 
-- (UITableView*) tableView
-{
-    id view = [self superview];
-    while ([view isKindOfClass:[UITableView class]] == NO) {
-        view = [view superview];
-    }
-    UITableView *tableView = (UITableView *)view;
-    return tableView;
-}
-
 - (void) updateCellContentsAnimatedWithDirection:(UISwipeGestureRecognizerDirection)direction
 {
     UITableView *tableView = [self tableView];
@@ -181,8 +172,6 @@
 
 - (void) incrementCellPositionInDirection:(UISwipeGestureRecognizerDirection)direction
 {
-    
-    NSLog(@"Before: %f", self.cellPosition.x);
     if ([self isADriveDetailCell]) {
         if (direction == UISwipeGestureRecognizerDirectionLeft) {
             if (self.cellPosition.x == self.cellData.count-1) self.cellPosition = CGPointMake(0.0, self.cellPosition.y); //Looping functionality of swipe list
@@ -194,8 +183,6 @@
         }
     }
         //Leaving the other two tabs just clickable for now... I feel it's better UI
-    NSLog(@"After: %f", self.cellPosition.x);
-    //[self updateCellContents]; //Update the cell after the incrementing of position
     [self updateCellContentsAnimatedWithDirection:direction];
 }
 
@@ -429,3 +416,4 @@
 }
 
 @end
+*/

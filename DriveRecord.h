@@ -13,7 +13,7 @@
 
 @interface DriveRecord : NSManagedObject
 
-@property (nonatomic, retain) DriveDetailContainer *driveDetailContainer;
+@property (nonatomic, strong) DriveDetailContainer *driveDetailContainer;
 
 
 @end

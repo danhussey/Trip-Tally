@@ -104,6 +104,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DriveCell" id="hvS-8w-DvZ">
+                                <rect key="frame" x="0.0" y="163" width="320" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hvS-8w-DvZ" id="JGc-nq-QjI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="NHf-cb-FIl" id="0Yj-TL-5JJ"/>
@@ -193,7 +201,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRI-R6-BVU">
                                 <rect key="frame" x="117" y="465" width="86" height="44"/>
-                                <color key="backgroundColor" patternImage="0F0D792A-084A-4CB2-9BA5-C4109C4DB324" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="333928DE-D9F1-4BB1-A5E9-8DBE83365AD5" colorSpace="pattern"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Rvd-BS-WI5"/>
                                     <constraint firstAttribute="width" constant="86" id="xQy-NM-TPo"/>
@@ -310,7 +318,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0F0D792A-084A-4CB2-9BA5-C4109C4DB324" width="256" height="256">
+        <image name="333928DE-D9F1-4BB1-A5E9-8DBE83365AD5" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4759,7 +4767,7 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="tLQ-Pr-NWm"/>
         <segue reference="CPr-k2-VpK"/>
-        <segue reference="Ctk-U1-uIo"/>
     </inferredMetricsTieBreakers>
 </document>

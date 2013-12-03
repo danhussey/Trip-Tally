@@ -8,16 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <QuartzCore/QuartzCore.h>
+#import "DriveRecordDeveloper.h"
 
 @interface DriveDetailCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *detailField;
 @property (strong, nonatomic, readonly) NSMutableArray *cellData;
 @property (strong, nonatomic) NSString *cellType;
+@property (weak, nonatomic) UITableView* tableView;
 
 - (void) handleSwipeFromTableViewRecognizer: (UISwipeGestureRecognizer*) gestureRecognizer;
 - (BOOL) isReadyForSegue;
 - (BOOL) isInCustomDetailPosition;
+- (NSManagedObject*) currentObjectBeingDisplayed;
+- (void) updateCellText;
 
 
 @end

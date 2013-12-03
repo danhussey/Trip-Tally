@@ -5,7 +5,6 @@
 //  Created by Daniel Hussey on 29/11/2013.
 //  Copyright (c) 2013 Daniel Hussey. All rights reserved.
 //
-//  Not to be used for the odometer cell
 
 #import "DriveDetailCell.h"
 #define detailLabelTag 1
@@ -45,10 +44,13 @@
 {
     NSManagedObjectContext *managedObjectContext;
     WrappingCellPositionFactory *wrappingCellPosition;
+    BOOL deleteFlag; //Decides whther or not incrementing will happen upon swipe
     
 }
 
+@property (weak, nonatomic) NSNumber *deleteButtonShowing;
 @property (strong, nonatomic) NSNumber *cellPosition;
+@property (strong, nonatomic) UIButton *deleteButton;
 
 @end
 
@@ -67,24 +69,38 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
+    //[super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
 
-- (void) awakeFromNib
+- (void) awakeFromNib   //Cell type not yet set
 {
     //Custom init goes here
     managedObjectContext = [self managedObjectContext];
     wrappingCellPosition = [[WrappingCellPositionFactory alloc] init];
-    
     self.detailField.delegate = self;
+    deleteFlag = NO;
+    [self updateOdometerCell];
 }
 
 #pragma mark - Cell Information Methods
 
-- (BOOL) isInCustomDetailPosition
+- (NSManagedObject*) currentObjectBeingDisplayed //Only call after checked for custom cell position
 {
-    if (wrappingCellPosition.cellPosition > 0 && wrappingCellPosition.cellPosition != self.cellData.count-1) return YES;
+    return [self.cellData objectAtIndex:wrappingCellPosition.cellPosition];
+}
+
+- (BOOL) isOdometerOrDriveCell
+{
+    if ([self.cellType isEqualToString:@"Odometer"] || [self.cellType isEqualToString:@"Drive"]) {
+        return YES;
+    }
+    else return NO;
+}
+
+- (BOOL) isInCustomDetailPosition //Automatically returns no for odometer and drive cell
+{
+    if (wrappingCellPosition.cellPosition > 0 && wrappingCellPosition.cellPosition != self.cellData.count-1 && ![self isOdometerOrDriveCell]) return YES;
     else {
         return NO;
     }
@@ -92,8 +108,14 @@
 
 - (BOOL) isReadyForSegue
 {
+    [self endEditing:YES];
+    [self updateCellText];
     if ([self isInCustomDetailPosition]) return YES;
-    else return NO;
+    else if ([self isOdometerOrDriveCell]) {
+        if (![self.detailField.text isEqualToString:@"Odometer"]) return YES;
+    }
+    [self shakeView:self];
+    return NO;
 }
 
 - (BOOL) isInAddNewPosition
@@ -110,8 +132,24 @@
         NSManagedObject *managedObject = (NSManagedObject*)[self.cellData objectAtIndex:wrappingCellPosition.cellPosition];
         updatedText = [self stringForManagedObject:managedObject];
     }
+    else if ([self isOdometerOrDriveCell]) {
+        //updatedText = [self.cellData firstObject]; //The title for these cells are always the first object (Check cell data method
+        [self updateOdometerCell];
+        return;
+    }
     else updatedText = [self.cellData objectAtIndex:wrappingCellPosition.cellPosition];
     self.detailField.text = updatedText;
+}
+
+- (void) updateOdometerCell {
+    DriveDetailCell *carCell = (DriveDetailCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    DriveDetailCell *odometerCell = (DriveDetailCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    odometerCell.detailField.text = @"Odometer";
+    if ([carCell isInCustomDetailPosition]) {
+        NSManagedObject *car = [carCell currentObjectBeingDisplayed];
+        int odometer = (int)[[car valueForKey:@"odometer"] intValue];
+        odometerCell.detailField.text = [NSString stringWithFormat:@"%i KM", odometer];
+    }
 }
 
 #pragma mark - Getting and Parsing Cell Data
@@ -119,15 +157,22 @@
 - (NSMutableArray*) cellData //Simple, parsed copy of the cell's data coming from the database. Also updates the wrapping position incrementor
 //Array of NSStrings
 {
-    NSString *cellEntityName = self.cellType;
-    NSFetchRequest *cellDataRequest = [[NSFetchRequest alloc] initWithEntityName:cellEntityName];
-    NSMutableArray *cellDataFetchResults = [[managedObjectContext executeFetchRequest:cellDataRequest error:nil] mutableCopy];
-    NSMutableArray *parsedCellDataArray = [self parsedCellDataArrayForCurrentCellType: cellDataFetchResults];
+    if (![self isOdometerOrDriveCell]) {
+        NSString *cellEntityName = self.cellType;
+        NSFetchRequest *cellDataRequest = [[NSFetchRequest alloc] initWithEntityName:cellEntityName];
+        NSMutableArray *cellDataFetchResults = [[managedObjectContext executeFetchRequest:cellDataRequest error:nil] mutableCopy];
+        NSMutableArray *parsedCellDataArray = [self parsedCellDataArrayForCurrentCellType: cellDataFetchResults];
+        
+        //Updating the wrapping position keeper
+        wrappingCellPosition.cellDataArrayCount = parsedCellDataArray.count;
+        
+        return parsedCellDataArray;
+    }
     
-    //Updating the wrapping position keeper
-    wrappingCellPosition.cellDataArrayCount = parsedCellDataArray.count;
-    
-    return parsedCellDataArray;
+    else if ([self.cellType isEqualToString:@"Drive"]) {
+        NSMutableArray *driveCellDataArray = [NSMutableArray arrayWithObject:@"Drive"];
+        return driveCellDataArray;
+    }
 }
 
 - (NSMutableArray*) convertAllManagedObjectsToStrings: (NSMutableArray*) array
@@ -168,6 +213,7 @@
 
 - (void) handleSwipeFromTableViewRecognizer:(UISwipeGestureRecognizer *)gestureRecognizer
 {
+    if (![self isOdometerOrDriveCell])
     [self swipeEventAnimated:YES withRecognizer:gestureRecognizer];
 }
 
@@ -186,7 +232,6 @@
     if (animated)
     {
         NSLog(@"Before: %i", wrappingCellPosition.cellPosition);
-        [self.detailField endEditing:YES]; //In case it's editing while we swipe
         
         //Frame positions
         CGRect originalContentViewFrame = self.contentView.frame;
@@ -201,14 +246,16 @@
         switch (gestureRecognizer.direction) {
             case UISwipeGestureRecognizerDirectionLeft: //Increment
             {
-                [wrappingCellPosition incrementCellPosition];
+                if (!deleteFlag)
+                    [wrappingCellPosition incrementCellPosition];
                 transitionView.frame = rightOfOriginalContentViewFrame;
             }
                 break;
                 
             case UISwipeGestureRecognizerDirectionRight: //Decrement
             {
-                [wrappingCellPosition decrementCellPosition];
+                if (!deleteFlag)
+                    [wrappingCellPosition decrementCellPosition];
                 transitionView.frame = leftOfOriginalContentViewFrame;
             }
                 break;
@@ -220,7 +267,6 @@
         transitionView.detailField.text = [self stringForManagedObject:[self.cellData objectAtIndex:wrappingCellPosition.cellPosition]];
         [self.contentView addSubview:transitionView];
         
-        
         [UIView animateWithDuration:0.15
                          animations:^{
                              if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft)
@@ -231,55 +277,84 @@
          
                          completion:^(BOOL finished) {
                              if (finished) {
+                                 //self.backgroundColor = [UIColor blueColor];
                                  self.detailField.text = transitionView.detailField.text;
                                  self.contentView.frame = originalContentViewFrame;
+                                 [self.detailField endEditing:YES];
                                  [transitionView removeFromSuperview];
                              }
                          }];
         NSLog(@"After: %i", wrappingCellPosition.cellPosition);
+        deleteFlag = NO;
+        [self updateCellText];
+        [self updateOdometerCell];
     }
 }
 
 #pragma mark - Text Field Editing Logic
 
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+    [self updateCellText];
+    return YES;
+}
+
+- (BOOL) textFieldShouldClear:(UITextField *)textField {
+    if (![self isOdometerOrDriveCell] && [self isInCustomDetailPosition] && ![self.deleteButtonShowing boolValue]) {
+        self.deleteButtonShowing = [NSNumber numberWithBool:YES];
+        return YES;
+    }
+}
+
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([self isInCustomDetailPosition]) return YES;
+    if ([self isInCustomDetailPosition]) {
+        textField.clearsOnBeginEditing = NO;
+        return YES;
+    }
     else if ([self isInAddNewPosition]) {
         textField.clearsOnBeginEditing = YES;
         return YES;
     }
-    else {
-        return NO;
+    else if ([self isOdometerOrDriveCell]) {
+        DriveDetailCell *carCell = (DriveDetailCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if ([carCell isInCustomDetailPosition]) {
+            textField.clearsOnBeginEditing = YES;
+            textField.keyboardType = UIKeyboardTypeNumberPad;
+            return YES;
+        }
+        else return NO;
     }
+    else return NO;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    [textField endEditing:YES];
+    NSString *copyOfText = [[NSString alloc] initWithString:textField.text];
+    [self endEditing:YES];
+    self.deleteButtonShowing = NO;
     if ([self isInAddNewPosition]){
-        if ([self hasDuplicateInDatabase:textField.text] || [textField.text isEqualToString:@""] ) {
+        if ([self hasDuplicateInDatabase:copyOfText] || [copyOfText isEqualToString:@""] ) {
             [self shakeView:self];
             [self updateCellText];
             return NO;
         }
         else {
-            [self addDetailToDatabaseWithGeneralKey:textField.text];
+            [self addDetailToDatabaseWithGeneralKey:copyOfText];
             [self updateCellText];
             return YES;
         }
     }
     else if ([self isInCustomDetailPosition]) {
-        if ([textField.text isEqualToString:@""]) {
+        if ([copyOfText isEqualToString:@""]) {
             [self shakeView:self];
             [self updateCellText];
             return NO;
         }
-        else if ([self numberOfMatchesToString:textField.text] == 0) {
-            [[self.cellData objectAtIndex:wrappingCellPosition.cellPosition] setValue:textField.text forKey:@"generalKey"];
+        else if ([self numberOfMatchesToString:copyOfText] == 0) {
+            [[self.cellData objectAtIndex:wrappingCellPosition.cellPosition] setValue:copyOfText forKey:@"generalKey"];
             [managedObjectContext save:nil];
         }
-        else if ([self numberOfMatchesToString:textField.text] > 0) {
+        else if ([self numberOfMatchesToString:copyOfText] > 0) {
             [self shakeView:self];
             [self updateCellText];
             return NO;
@@ -287,9 +362,54 @@
         [self updateCellText];
         return YES;
     }
+    else if ([self isOdometerOrDriveCell]) {
+        if ([self.cellType isEqualToString:@"Odometer"]) {
+            [self alterOdometerWithText:copyOfText];
+        }
+    }
+    return YES;
 }
 
 #pragma mark - Database methods
+
+- (void) deleteDetailFromStore: (NSString*) detailName
+{
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:self.cellType];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey like %@", detailName]];
+    NSMutableArray *results = [[managedObjectContext executeFetchRequest:request error:nil] mutableCopy];
+    if (results.count == 1) {
+        [managedObjectContext deleteObject:results[0]];
+        [managedObjectContext save:nil];
+        deleteFlag = YES;
+    }
+    else {
+        NSLog(@"ERROR: deleteDetailFromStore fetch results returned with count: %i", results.count);
+    }
+    UISwipeGestureRecognizer *dummyRecognizer = [[UISwipeGestureRecognizer alloc] init]; //A dummy recognizer to simulate swiping left
+    dummyRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self swipeEventAnimated:YES withRecognizer:dummyRecognizer];
+    //[self updateCellText];
+}
+
+- (void) alterOdometerWithText: (NSString*) text
+{
+    if ([self.cellType isEqualToString:@"Odometer"]) {
+        NSManagedObjectContext *context = [self managedObjectContext];
+        DriveDetailCell *carCell = (DriveDetailCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if ([carCell isInCustomDetailPosition]) {
+            NSManagedObject *car = [carCell currentObjectBeingDisplayed];
+            [car setValue:[NSNumber numberWithInt:text.intValue] forKey:@"odometer"];
+            NSError *error;
+            error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
+            [self updateOdometerCell];
+        }
+    }
+}
 
 - (void) addDetailToDatabaseWithGeneralKey: (NSString*) string
 {
@@ -337,6 +457,59 @@
     [self updateCellText]; //Only called once, when set
 }
 
+- (UIButton*) deleteButton {
+    if (!_deleteButton) {
+        _deleteButton = [[UIButton alloc] init];
+        UINib *deleteButtonNib = [UINib nibWithNibName:@"DeleteButton" bundle:nil];
+        
+        _deleteButton = [[deleteButtonNib instantiateWithOwner:self options:nil] firstObject];
+        //_deleteButton.alpha = 0.0;
+        _deleteButton.frame = CGRectMake(320, self.frame.origin.y, _deleteButton.frame.size.width, _deleteButton.frame.size.height);
+                                           
+                                           
+        // Create a mask layer and the frame to determine what will be visible in the view.
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        CGRect maskRect = self.detailField.frame;
+        
+        // Create a path with the rectangle in it.
+        CGPathRef path = CGPathCreateWithRect(maskRect, NULL);
+        
+        // Set the path to the mask layer.
+        maskLayer.path = path;
+        
+        // Release the path since it's not covered by ARC.
+        CGPathRelease(path);
+        // Set the mask of the view.
+        //_deleteButton.layer.mask = maskLayer;
+        
+        [_deleteButton addTarget:self
+                          action:@selector(deleteButtonPressed)
+           forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _deleteButton;
+}
+
+- (void) setDeleteButtonShowing:(NSNumber *)deleteButtonShowing
+{
+    BOOL boolValue = [deleteButtonShowing boolValue];
+    [self.tableView insertSubview:self.deleteButton aboveSubview:self.detailField];
+    
+    if (boolValue && [_deleteButtonShowing boolValue] == NO) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.deleteButton.frame = CGRectMake(320-55, _deleteButton.frame.origin.y, _deleteButton.frame.size.width, _deleteButton.frame.size.height);
+                         }];
+    }
+    else if (!boolValue && [_deleteButtonShowing boolValue] == YES) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.deleteButton.frame = CGRectMake(320, _deleteButton.frame.origin.y, _deleteButton.frame.size.width, _deleteButton.frame.size.height);
+                         }];
+        self.deleteButton = nil;
+    }
+    _deleteButtonShowing = deleteButtonShowing;
+}
+
 #pragma mark - Misc
 
 - (void)shakeView:(UIView *)viewToShake
@@ -357,6 +530,15 @@
             } completion:NULL];
         }
     }];
+}
+
+- (void) deleteButtonPressed
+{
+    if ([self isInCustomDetailPosition]){
+        NSString *originalTextBeforeEditing = [self stringForManagedObject:[self.cellData objectAtIndex:wrappingCellPosition.cellPosition]];
+        self.deleteButtonShowing = NO;
+        [self deleteDetailFromStore:originalTextBeforeEditing];
+    }
 }
 
 @end

@@ -37,6 +37,8 @@
 		488E68D717E47DFA0055A908 /* Learner_Log_BookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68D617E47DFA0055A908 /* Learner_Log_BookTests.m */; };
 		488E68E217E47E3D0055A908 /* StartscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E68E117E47E3D0055A908 /* StartscreenViewController.m */; };
 		48BD220717FC286E0093669F /* DriveInSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BD220617FC286E0093669F /* DriveInSessionViewController.m */; };
+		48E89883184DC3CB00D3AD5F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E89882184DC3CB00D3AD5F /* QuartzCore.framework */; };
+		48E89885184DD83F00D3AD5F /* DeleteButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48E89884184DD83F00D3AD5F /* DeleteButton.xib */; };
 		48F99A1918351B9300F69672 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F99A1818351B9300F69672 /* ReviewViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		488E68E117E47E3D0055A908 /* StartscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartscreenViewController.m; sourceTree = "<group>"; };
 		48BD220517FC286E0093669F /* DriveInSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveInSessionViewController.h; sourceTree = "<group>"; };
 		48BD220617FC286E0093669F /* DriveInSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveInSessionViewController.m; sourceTree = "<group>"; };
+		48E89882184DC3CB00D3AD5F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		48E89884184DD83F00D3AD5F /* DeleteButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeleteButton.xib; sourceTree = "<group>"; };
 		48F99A1718351B9300F69672 /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReviewViewController.h; path = ../ReviewViewController.h; sourceTree = "<group>"; };
 		48F99A1818351B9300F69672 /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReviewViewController.m; path = ../ReviewViewController.m; sourceTree = "<group>"; };
 		48F99A1A183545E800F69672 /* DriveRecordDeveloper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DriveRecordDeveloper.h; path = "Learner Log Book/DriveRecordDeveloper.h"; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E89883184DC3CB00D3AD5F /* QuartzCore.framework in Frameworks */,
 				4835E0921830C172000236DA /* CoreLocation.framework in Frameworks */,
 				486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */,
 				488E68A317E47DFA0055A908 /* UIKit.framework in Frameworks */,
@@ -143,6 +148,7 @@
 			children = (
 				484EE5CD1848B73F00C5EEFA /* DriveDetailCell.h */,
 				484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */,
+				48E89884184DD83F00D3AD5F /* DeleteButton.xib */,
 				484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */,
 				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
 				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
@@ -178,6 +184,7 @@
 		488E68A117E47DFA0055A908 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48E89882184DC3CB00D3AD5F /* QuartzCore.framework */,
 				4835E0911830C172000236DA /* CoreLocation.framework */,
 				486BD58617F6C5C100E38172 /* CoreData.framework */,
 				488E68A217E47DFA0055A908 /* UIKit.framework */,
@@ -330,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E89885184DD83F00D3AD5F /* DeleteButton.xib in Resources */,
 				488E68AD17E47DFA0055A908 /* InfoPlist.strings in Resources */,
 				488E68B517E47DFA0055A908 /* Default.png in Resources */,
 				4835E094183134DD000236DA /* vicCriteria.plist in Resources */,

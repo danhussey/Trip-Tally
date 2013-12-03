@@ -28,6 +28,7 @@
 - (id)transformedValue:(id)value {
         DriveDetailContainer *container = value;
         NSData *dataContainer = [NSKeyedArchiver archivedDataWithRootObject:container];
+    NSLog(@"SHIT TITS");
         return dataContainer;
 }
 
