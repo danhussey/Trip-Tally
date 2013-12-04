@@ -21,6 +21,6 @@
 @property (strong, nonatomic) NSMutableArray *recordedLocationsArray;
 @property (strong, nonatomic) NSMutableArray *locationHistory;
 
-@property (strong, nonatomic) DriveRecord *driveRecord;
+@property (strong, nonatomic) DriveDetailContainer *driveDetailContainer;
 
 @end

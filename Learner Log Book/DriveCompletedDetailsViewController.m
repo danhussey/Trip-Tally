@@ -148,12 +148,12 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails = self.criteriaDictionary;
+    self.driveDetailContainer.driveCompletionBinaryDetails = self.criteriaDictionary;
     if ([segue.identifier  isEqualToString:@"toRecentDriveReview"]) {
         [((RecentDriveReviewViewController*) segue.destinationViewController) setDisplaySave:YES];
         
         UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-        nextViewController.driveRecord = self.driveRecord;
+        nextViewController.driveDetailContainer = self.driveDetailContainer;
     }
     //[self.navigationController dismissViewControllerAnimated:NO completion:nil];
 }

@@ -23,6 +23,7 @@
 {
     if (!_containerArray) {
         _containerArray = [[NSMutableArray alloc] init];
+        
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"DriveRecord"];
         NSError *error = nil;
         NSMutableArray *unsortedArray = [[context executeFetchRequest:request error:&error] mutableCopy];
@@ -161,7 +162,7 @@
         
         if ([segue.identifier isEqualToString:@"toRecentDriveReview"]) {
             UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-            nextViewController.driveRecord = self.containerArray[selectedCellRow];
+            nextViewController.driveDetailContainer = self.containerArray[selectedCellRow];
         }
     }
     

@@ -18,11 +18,6 @@
 
 @implementation StartscreenViewController
 
-- (void) defuseManagedObjectDeleter
-{
-    unfinishedObjectToBeDeleted = nil;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -47,7 +42,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     if (unfinishedObjectToBeDeleted) {
-        [[self managedObjectContext] deleteObject:unfinishedObjectToBeDeleted];
     }
 }
 
@@ -64,14 +58,9 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString: @"toDriveScreenSegue"]) {
-        NSManagedObjectContext *context = [self managedObjectContext];
-        DriveRecord *newDriveRecord = (DriveRecord*)[NSEntityDescription insertNewObjectForEntityForName:@"DriveRecord" inManagedObjectContext:context];
         DriveDetailContainer *newContainer = [[DriveDetailContainer alloc] init];
-        newDriveRecord.driveDetailContainer = newContainer;
         UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-        nextViewController.driveRecord = newDriveRecord;
-        
-        unfinishedObjectToBeDeleted = newDriveRecord;
+        nextViewController.driveDetailContainer = newContainer;
     }
 }
 

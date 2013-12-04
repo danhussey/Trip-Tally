@@ -15,6 +15,6 @@
 @interface DriveCompletedDetailsViewController : UITableViewController <DriveRecordDeveloper>
 
 @property (strong, nonatomic) NSMutableDictionary *criteriaDictionary;
-@property (strong, nonatomic) DriveRecord *driveRecord;
+@property (strong, nonatomic) DriveDetailContainer *driveDetailContainer;
 
 @end

@@ -15,6 +15,6 @@
 
 @interface DriveViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, DriveRecordDeveloper>
 
-@property (strong, nonatomic) DriveRecord *driveRecord;
+@property (strong, nonatomic) DriveDetailContainer *driveDetailContainer;
 
 @end

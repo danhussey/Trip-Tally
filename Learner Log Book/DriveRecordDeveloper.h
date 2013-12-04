@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DriveRecord.h"
+#import "DriveDetailContainer.h"
 
 @protocol DriveRecordDeveloper <NSObject>
 
-@property (strong, nonatomic) DriveRecord* driveRecord;
+@property (strong, nonatomic) DriveDetailContainer *driveDetailContainer;
 
 @end

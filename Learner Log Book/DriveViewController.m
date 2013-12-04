@@ -134,12 +134,11 @@
     }
     static NSString *CellIdentifier = @"DriveDetailCell";
     DriveDetailCell *cell = (DriveDetailCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == Nil) {
-        cell = [[DriveDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-    cell.cellType = [tableData objectAtIndex:indexPath.row];
-    cell.tableView = self.tableView;
-    if ([cell.cellType isEqualToString:@"Odometer"]) cell.detailField.text = cell.cellType;
+    if (cell.cellType == nil) {
+        cell.cellType = [tableData objectAtIndex:indexPath.row];
+        cell.tableView = self.tableView;
+        if ([cell.cellType isEqualToString:@"Odometer"]) cell.detailField.text = cell.cellType;
+    }
     return cell;
 }
 
@@ -152,7 +151,6 @@
     DriveDetailCell *swipedCell  = (DriveDetailCell*)[tableView cellForRowAtIndexPath:swipedIndexPath];
     
     if ([swipedCell respondsToSelector:@selector(handleSwipeFromTableViewRecognizer:)]) {
-        NSLog(@"Responds to swipe selector");
         [swipedCell handleSwipeFromTableViewRecognizer:recognizer];
     }
 }
@@ -193,13 +191,10 @@
 - (void) synchroniseDataToManagedObjectFromCell:(DriveDetailCell *)cell
 {
     if ([cell isInCustomDetailPosition]) {
-        if ([cell.cellType isEqualToString:@"Car"]) self.driveRecord.driveDetailContainer.car = cell.detailField.text;
-        else if ([cell.cellType isEqualToString:@"Driver"]) self.driveRecord.driveDetailContainer.driver = cell.detailField.text;
-        else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveRecord.driveDetailContainer.supervisor = cell.detailField.text;
-        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveRecord.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
-        NSError *error = nil;
-        [[self managedObjectContext] save:&error];
-        if (error) NSLog(@"error: %@", error.localizedDescription);
+        if ([cell.cellType isEqualToString:@"Car"]) self.driveDetailContainer.car = cell.detailField.text;
+        else if ([cell.cellType isEqualToString:@"Driver"]) self.driveDetailContainer.driver = cell.detailField.text;
+        else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveDetailContainer.supervisor = cell.detailField.text;
+        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
     }
 }
 
@@ -207,7 +202,7 @@
 {
     if ([segue.identifier isEqualToString: @"toDriveInSessionSegue"]) {
         UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-        nextViewController.driveRecord = self.driveRecord;
+        nextViewController.driveDetailContainer = self.driveDetailContainer;
     }
 }
 /*
@@ -251,7 +246,7 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didRRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     

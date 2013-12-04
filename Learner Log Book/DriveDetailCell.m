@@ -69,7 +69,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    //[super setSelected:selected animated:animated];
+    [super setSelected:NO animated:animated];
     // Configure the view for the selected state
 }
 
@@ -80,7 +80,6 @@
     wrappingCellPosition = [[WrappingCellPositionFactory alloc] init];
     self.detailField.delegate = self;
     deleteFlag = NO;
-    [self updateOdometerCell];
 }
 
 #pragma mark - Cell Information Methods
@@ -139,6 +138,7 @@
     }
     else updatedText = [self.cellData objectAtIndex:wrappingCellPosition.cellPosition];
     self.detailField.text = updatedText;
+    [self updateOdometerCell];
 }
 
 - (void) updateOdometerCell {
@@ -241,7 +241,6 @@
         UINib *transitionNib = [UINib nibWithNibName:@"DriveDetailCell" bundle:nil];
         DriveDetailCell *transitionView = (DriveDetailCell*)[[transitionNib instantiateWithOwner:self options:nil] firstObject];
         
-        NSLog(@"TransitionView: %@", transitionView.description);
         
         switch (gestureRecognizer.direction) {
             case UISwipeGestureRecognizerDirectionLeft: //Increment
@@ -277,16 +276,15 @@
          
                          completion:^(BOOL finished) {
                              if (finished) {
-                                 //self.backgroundColor = [UIColor blueColor];
                                  self.detailField.text = transitionView.detailField.text;
                                  self.contentView.frame = originalContentViewFrame;
                                  [self.detailField endEditing:YES];
                                  [transitionView removeFromSuperview];
+                                 NSLog(@"After: %i", wrappingCellPosition.cellPosition);
+                                 deleteFlag = NO;
+                                 [self updateCellText];
                              }
                          }];
-        NSLog(@"After: %i", wrappingCellPosition.cellPosition);
-        deleteFlag = NO;
-        [self updateCellText];
         [self updateOdometerCell];
     }
 }
@@ -352,7 +350,6 @@
         }
         else if ([self numberOfMatchesToString:copyOfText] == 0) {
             [[self.cellData objectAtIndex:wrappingCellPosition.cellPosition] setValue:copyOfText forKey:@"generalKey"];
-            [managedObjectContext save:nil];
         }
         else if ([self numberOfMatchesToString:copyOfText] > 0) {
             [self shakeView:self];
@@ -465,22 +462,6 @@
         _deleteButton = [[deleteButtonNib instantiateWithOwner:self options:nil] firstObject];
         //_deleteButton.alpha = 0.0;
         _deleteButton.frame = CGRectMake(320, self.frame.origin.y, _deleteButton.frame.size.width, _deleteButton.frame.size.height);
-                                           
-                                           
-        // Create a mask layer and the frame to determine what will be visible in the view.
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        CGRect maskRect = self.detailField.frame;
-        
-        // Create a path with the rectangle in it.
-        CGPathRef path = CGPathCreateWithRect(maskRect, NULL);
-        
-        // Set the path to the mask layer.
-        maskLayer.path = path;
-        
-        // Release the path since it's not covered by ARC.
-        CGPathRelease(path);
-        // Set the mask of the view.
-        //_deleteButton.layer.mask = maskLayer;
         
         [_deleteButton addTarget:self
                           action:@selector(deleteButtonPressed)

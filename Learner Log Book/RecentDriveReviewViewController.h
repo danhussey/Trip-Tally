@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *detailsTextBox;
 @property (nonatomic, strong) DriveDetailContainer* driveDetails;
-@property (nonatomic, strong) DriveRecord *driveRecord;
+@property (strong, nonatomic) DriveDetailContainer *driveDetailContainer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *topRightNavButton;
 @property (nonatomic) BOOL displaySave;
 

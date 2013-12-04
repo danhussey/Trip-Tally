@@ -21,16 +21,14 @@
 {
     if ([sender.title isEqualToString:@"Save"]) {
         NSManagedObjectContext *context = [self managedObjectContext];
-        NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Car"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"generalKey == %@", self.driveRecord.driveDetailContainer.car]];
-        NSArray *results = [context executeFetchRequest:request error:nil];
-        [results.firstObject setValue:self.driveRecord.driveDetailContainer.odometerFinish forKey:@"odometer"];
+        DriveRecord *driveRecord = [[DriveRecord alloc] initWithEntity:[NSEntityDescription entityForName:@"DriveRecord" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+        
+        driveRecord.driveDetailContainer = self.driveDetailContainer;
         NSError *error = nil;
         // Save the object to persistent store
         if (![context save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
-        [self.navigationController.viewControllers[0] performSelector:@selector(defuseManagedObjectDeleter)];
         
         //NOTE: Update when the singleton has been changed to an instance of DriveRecord
         
@@ -51,14 +49,6 @@
         context = [delegate managedObjectContext];
     }
     return context;
-}
-
-- (DriveDetailContainer*) driveDetails
-{
-    if (!_driveDetails) {
-        _driveDetails = self.driveRecord.driveDetailContainer;
-    }
-    return _driveDetails;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,7 +75,7 @@
         self.topRightNavButton.title = nil;
     }
     
-    NSString *string = [NSString stringWithFormat:@"Date and time: %@\nDriving Time: %f\n Odometer Start: %i \nOdometer Finish: %i\n And all this stuff: %@", self.driveRecord.driveDetailContainer.startDate.description, self.driveDetails.elapsedTime, self.driveRecord.driveDetailContainer.odometerStart.intValue, self.driveRecord.driveDetailContainer.odometerFinish.intValue, self.driveRecord.driveDetailContainer.driveCompletionBinaryDetails.description];
+    NSString *string = [NSString stringWithFormat:@"%@", self.driveDetailContainer.description];
     self.detailsTextBox.text = string;
 }
 

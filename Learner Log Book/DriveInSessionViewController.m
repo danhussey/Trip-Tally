@@ -43,9 +43,9 @@
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.pausesLocationUpdatesAutomatically = NO; //Look into this
-        _locationManager.distanceFilter = 5;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-        _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+       // _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
         _locationManager.delegate = self;
     }
     return _locationManager;
@@ -66,11 +66,12 @@
 }
 
 - (IBAction)doFinishedButton:(UIButton *)sender {
-    self.driveRecord.driveDetailContainer.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
-    int distanceInKilometres = (int)self.driveRecord.driveDetailContainer.distanceTravelled/1000;
-    self.driveRecord.driveDetailContainer.odometerFinish = [NSNumber numberWithInt:[self.driveRecord.driveDetailContainer.odometerStart intValue] + distanceInKilometres];
-    self.driveRecord.driveDetailContainer.endDate = [NSDate date];
-    self.driveRecord.driveDetailContainer.elapsedTime = [self.driveRecord.driveDetailContainer.endDate timeIntervalSinceDate:self.driveRecord.driveDetailContainer.startDate];
+    self.driveDetailContainer.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
+    int distanceInKilometres = (int)self.driveDetailContainer.distanceTravelled/1000;
+    self.driveDetailContainer.odometerFinish = [NSNumber numberWithInt:[self.driveDetailContainer.odometerStart intValue] + distanceInKilometres];
+    self.driveDetailContainer.endDate = [NSDate date];
+    self.driveDetailContainer.elapsedTime = [self.driveDetailContainer.endDate timeIntervalSinceDate:self.driveDetailContainer.startDate];
+    NSLog(@"Locations: %@", self.locationManager.location);
 }
 
 - (CLLocationDistance)distanceTravelledFromLocations:(NSMutableArray*)locations
@@ -83,6 +84,12 @@
         }
     }
     else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Locations Recorded"
+                                                        message:@"Can't calculate distance travelled - No Locations Have Been Recorded"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles: nil];
+        [alert show];
         NSLog(@"Locations array = nil");
     }
     return totalDistance;
@@ -105,7 +112,7 @@
     self.driveStatusButton.backgroundColor = [UIColor greenColor];
     [self setupTimer];
     [self startTimer]; //View only loads once... right?
-    self.driveRecord.driveDetailContainer.startDate = [NSDate date];
+    self.driveDetailContainer.startDate = [NSDate date];
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusNotDetermined:
         case kCLAuthorizationStatusAuthorized:
@@ -122,8 +129,8 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
                                                             message:@"Can't calculate distance travelled - Location Services Disabled"
                                                            delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Okay", nil];
+                                                  cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles: nil];
             [alert show];
         }
             
@@ -151,10 +158,10 @@
         {
             //Well shit. Maybe like do odometer calculations if they want?
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
-                                                            message:@"Can't calculate distance travelled - Location Services Disabled"
+                                                            message:@"Can't Calculate Distance Travelled - Location Services Disabled"
                                                            delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Okay", nil];
+                                                  cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles: nil];
             [alert show];
         }
             
@@ -241,7 +248,6 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [self.locationManager stopUpdatingHeading];
     [self.locationManager stopUpdatingLocation];
 }
 
@@ -260,7 +266,7 @@
 {
     if ([segue.identifier isEqualToString: @"toDriveCompletedSegue"]) {
         UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-        nextViewController.driveRecord = self.driveRecord;
+        nextViewController.driveDetailContainer = self.driveDetailContainer;
     }
 }
 
