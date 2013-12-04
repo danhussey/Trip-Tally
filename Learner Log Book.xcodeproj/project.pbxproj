@@ -12,9 +12,9 @@
 		4835E0921830C172000236DA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4835E0911830C172000236DA /* CoreLocation.framework */; };
 		4835E094183134DD000236DA /* vicCriteria.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4835E093183134DD000236DA /* vicCriteria.plist */; };
 		4835E09B18337892000236DA /* DriveDetailContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4835E09A18337892000236DA /* DriveDetailContainer.m */; };
-		4835E09F18337ACA000236DA /* RecentDriveReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */; };
 		484EE5CC1848B41400C5EEFA /* DriveDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */; };
 		484EE5CF1848B73F00C5EEFA /* DriveDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */; };
+		485271C5184F46F300A1266E /* RecentDriveReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485271C4184F46F300A1266E /* RecentDriveReviewViewController.m */; };
 		486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */; };
 		486BD58717F6C5C200E38172 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486BD58617F6C5C100E38172 /* CoreData.framework */; };
 		486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5BD17F8521E00E38172 /* ExtendedCell.m */; };
@@ -60,11 +60,11 @@
 		4835E093183134DD000236DA /* vicCriteria.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = vicCriteria.plist; sourceTree = "<group>"; };
 		4835E09918337892000236DA /* DriveDetailContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriveDetailContainer.h; path = "Learner Log Book/DriveDetailContainer.h"; sourceTree = "<group>"; };
 		4835E09A18337892000236DA /* DriveDetailContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DriveDetailContainer.m; path = "Learner Log Book/DriveDetailContainer.m"; sourceTree = "<group>"; };
-		4835E09D18337ACA000236DA /* RecentDriveReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDriveReviewViewController.h; sourceTree = "<group>"; };
-		4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDriveReviewViewController.m; sourceTree = "<group>"; };
 		484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriveDetailCell.xib; sourceTree = "<group>"; };
 		484EE5CD1848B73F00C5EEFA /* DriveDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveDetailCell.h; sourceTree = "<group>"; };
 		484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveDetailCell.m; sourceTree = "<group>"; };
+		485271C3184F46F300A1266E /* RecentDriveReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDriveReviewViewController.h; sourceTree = "<group>"; };
+		485271C4184F46F300A1266E /* RecentDriveReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDriveReviewViewController.m; sourceTree = "<group>"; };
 		486BD58417F6C2A400E38172 /* Learner_Log_Book.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learner_Log_Book.xcdatamodel; sourceTree = "<group>"; };
 		486BD58617F6C5C100E38172 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		486BD5BC17F8521E00E38172 /* ExtendedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedCell.h; sourceTree = "<group>"; };
@@ -198,12 +198,12 @@
 			children = (
 				488E68BA17E47DFA0055A908 /* MainStoryboard_iPhone.storyboard */,
 				486BD58317F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld */,
-				48F99A1718351B9300F69672 /* ReviewViewController.h */,
-				48F99A1818351B9300F69672 /* ReviewViewController.m */,
-				4835E09D18337ACA000236DA /* RecentDriveReviewViewController.h */,
-				4835E09E18337ACA000236DA /* RecentDriveReviewViewController.m */,
+				485271C3184F46F300A1266E /* RecentDriveReviewViewController.h */,
+				485271C4184F46F300A1266E /* RecentDriveReviewViewController.m */,
 				488A053A1801544B00B3DA2E /* DriveCompletedDetailsViewController.h */,
 				488A053B1801544B00B3DA2E /* DriveCompletedDetailsViewController.m */,
+				48F99A1718351B9300F69672 /* ReviewViewController.h */,
+				48F99A1818351B9300F69672 /* ReviewViewController.m */,
 				48BD220517FC286E0093669F /* DriveInSessionViewController.h */,
 				48BD220617FC286E0093669F /* DriveInSessionViewController.m */,
 				4824424217E48CAD002DC72A /* DriveViewController.h */,
@@ -387,9 +387,9 @@
 				488A053C1801544B00B3DA2E /* DriveCompletedDetailsViewController.m in Sources */,
 				486BD58517F6C2A400E38172 /* Learner_Log_Book.xcdatamodeld in Sources */,
 				4835E09B18337892000236DA /* DriveDetailContainer.m in Sources */,
+				485271C5184F46F300A1266E /* RecentDriveReviewViewController.m in Sources */,
 				481B96361833D1A50095E93C /* DriveRecord.m in Sources */,
 				486BD5BE17F8521E00E38172 /* ExtendedCell.m in Sources */,
-				4835E09F18337ACA000236DA /* RecentDriveReviewViewController.m in Sources */,
 				48BD220717FC286E0093669F /* DriveInSessionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

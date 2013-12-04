@@ -190,12 +190,10 @@
 
 - (void) synchroniseDataToManagedObjectFromCell:(DriveDetailCell *)cell
 {
-    if ([cell isInCustomDetailPosition]) {
         if ([cell.cellType isEqualToString:@"Car"]) self.driveDetailContainer.car = cell.detailField.text;
         else if ([cell.cellType isEqualToString:@"Driver"]) self.driveDetailContainer.driver = cell.detailField.text;
         else if ([cell.cellType isEqualToString:@"Supervisor"]) self.driveDetailContainer.supervisor = cell.detailField.text;
-        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.textLabel.text intValue]];
-    }
+        else if ([cell.cellType isEqualToString:@"Odometer"]) self.driveDetailContainer.odometerStart = [NSNumber numberWithInt:[cell.detailField.text intValue]];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

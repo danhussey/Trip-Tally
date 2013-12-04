@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) NSString *driver, *supervisor, *car;
 @property (strong, nonatomic) NSNumber *odometerStart, *odometerFinish;
-@property (nonatomic) NSTimeInterval elapsedTime;
+@property (nonatomic) NSString *elapsedTime;
 @property (nonatomic) CLLocationDistance distanceTravelled;
 @property (strong, nonatomic) NSDictionary *driveCompletionBinaryDetails;
 @property (strong, nonatomic) NSDate *startDate, *endDate;

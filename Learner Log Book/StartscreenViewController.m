@@ -5,6 +5,7 @@
 //  Created by Daniel Hussey on 14/09/13.
 //  Copyright (c) 2013 Daniel Hussey. All rights reserved.
 //
+//  Settings ideas: change what is displayed int the review table view for the drive titles
 
 #import "StartscreenViewController.h"
 

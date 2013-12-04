@@ -25,7 +25,7 @@
     self.startDate = [aDecoder decodeObjectForKey:@"startDate"];
     self.endDate = [aDecoder decodeObjectForKey:@"endDate"];
     
-    self.elapsedTime = [aDecoder decodeIntegerForKey:@"elapsedTime"];
+    self.elapsedTime = [aDecoder decodeObjectForKey:@"elapsedTime"];
     self.distanceTravelled = [aDecoder decodeIntegerForKey:@"distanceTravelled"];
     
     return self;
@@ -43,7 +43,7 @@
     [aCoder encodeObject:self.driveCompletionBinaryDetails forKey:@"driveCompletionBinaryDetails"];
     [aCoder encodeObject:self.startDate forKey:@"startDate"];
     [aCoder encodeObject:self.endDate forKey:@"endDate"];
-    [aCoder encodeInteger:self.elapsedTime forKey:@"elapsedTime"];
+    [aCoder encodeObject:self.elapsedTime forKey:@"elapsedTime"];
     [aCoder encodeInteger:self.distanceTravelled forKey:@"distanceTravelled"];
 }
 

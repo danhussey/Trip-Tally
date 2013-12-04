@@ -299,8 +299,8 @@
 - (BOOL) textFieldShouldClear:(UITextField *)textField {
     if (![self isOdometerOrDriveCell] && [self isInCustomDetailPosition] && ![self.deleteButtonShowing boolValue]) {
         self.deleteButtonShowing = [NSNumber numberWithBool:YES];
-        return YES;
     }
+    return YES;
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField

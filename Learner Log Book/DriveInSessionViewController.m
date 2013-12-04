@@ -25,6 +25,7 @@
     NSTimeInterval elapsedTime;
     bool running;
     bool readyToRecordLocation; //Bool that allows the adding of a location to the locationsarray, set to true when the heading change is updated
+    int hours, minutes, seconds;
 }
 
 @end
@@ -70,7 +71,8 @@
     int distanceInKilometres = (int)self.driveDetailContainer.distanceTravelled/1000;
     self.driveDetailContainer.odometerFinish = [NSNumber numberWithInt:[self.driveDetailContainer.odometerStart intValue] + distanceInKilometres];
     self.driveDetailContainer.endDate = [NSDate date];
-    self.driveDetailContainer.elapsedTime = [self.driveDetailContainer.endDate timeIntervalSinceDate:self.driveDetailContainer.startDate];
+    //self.driveDetailContainer.elapsedTime = [self.driveDetailContainer.endDate timeIntervalSinceDate:self.driveDetailContainer.startDate];
+    self.driveDetailContainer.elapsedTime = [NSString stringWithFormat:@"%i h %i m", hours, minutes];
     NSLog(@"Locations: %@", self.locationManager.location);
 }
 
@@ -85,7 +87,7 @@
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Locations Recorded"
-                                                        message:@"Can't calculate distance travelled - No Locations Have Been Recorded"
+                                                        message:@"Can't calculate distance travelled - No Locations Have Been Recorded Yet"
                                                        delegate:self
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles: nil];
@@ -127,7 +129,7 @@
         {
             //Well shit. Maybe like do odometer calculations if they want?
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
-                                                            message:@"Can't calculate distance travelled - Location Services Disabled"
+                                                            message:@"Can't Calculate Distance Travelled - Location Services Disabled"
                                                            delegate:self
                                                   cancelButtonTitle:@"Okay"
                                                   otherButtonTitles: nil];
@@ -198,11 +200,11 @@
         elapsedTime = (currentTime - startTime) + elapsedTimeCache;
         
         //Extract time in form of hours minutes and seconds from elapsed time
-        int hours = (int) (elapsedTime/(60*60));
+        hours = (int) (elapsedTime/(60*60));
         elapsedTime -= (hours*60*60);
-        int minutes = (int) (elapsedTime/60);
+        minutes = (int) (elapsedTime/60);
         elapsedTime -= (minutes*60);
-        int seconds = (int) elapsedTime;
+        seconds = (int) elapsedTime;
         
         //Creates strings that have zeroes in them for numbers like 01
         NSString *hoursSection;

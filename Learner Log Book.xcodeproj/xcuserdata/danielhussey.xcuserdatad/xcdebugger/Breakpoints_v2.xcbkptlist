@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ReviewViewController.m"
-            timestampString = "407770444.638063"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Learner Log Book/DriveDetailCell.m"
             timestampString = "407842180.805195"
             startingColumnNumber = "9223372036854775807"
@@ -32,38 +16,6 @@
             startingLineNumber = "380"
             endingLineNumber = "380"
             landmarkName = "-deleteDetailFromStore:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/DriveDetailCell.m"
-            timestampString = "407842180.805195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "-alterOdometerWithText:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/DriveDetailCell.m"
-            timestampString = "407842180.805195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
-            landmarkName = "-addDetailToDatabaseWithGeneralKey:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,74 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learner Log Book/DriveViewController.m"
-            timestampString = "407840244.242815"
+            timestampString = "407861765.250243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-tableView:didRRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/DriveInSessionViewController.m"
-            timestampString = "407844340.548618"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "-locationManager:didUpdateLocations:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DriveInSessionViewController locationManager:didUpdateLocations:]"
-                  moduleName = "Learner Log Book"
-                  urlString = "file:///Users/danielhussey/Desktop/XCode/Learner%20Log%20Book/Learner%20Log%20Book/DriveInSessionViewController.m"
-                  timestampString = "407843154.927888"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "230"
-                  endingLineNumber = "230"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DriveInSessionViewController locationManager:didUpdateLocations:]"
-                  moduleName = "Learner Log Book"
-                  urlString = "file:///Users/danielhussey/Desktop/XCode/Learner%20Log%20Book/Learner%20Log%20Book/DriveInSessionViewController.m"
-                  timestampString = "407843154.928057"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "230"
-                  endingLineNumber = "230"
-                  offsetFromSymbolStart = "918">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Learner Log Book/DriveInSessionViewController.m"
-            timestampString = "407843094.489799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-doFinishedButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

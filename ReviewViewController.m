@@ -105,8 +105,13 @@
     // Configure the cell...
     //NOTE: Maybe for later - cells that extend downards to show the drive details
     DriveDetailContainer *cellDriveRecord = [self.containerArray[indexPath.row] driveDetailContainer];
-    NSString *driveDate = cellDriveRecord.startDate.description;
-    cell.textLabel.text = driveDate;
+    NSDate *driveDate = cellDriveRecord.startDate;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setTimeZone:[[NSCalendar currentCalendar] timeZone]];
+    NSString *formattedDate = [formatter stringFromDate:driveDate];
+    cell.textLabel.text = formattedDate;
     
     return cell;
 }
@@ -162,7 +167,7 @@
         
         if ([segue.identifier isEqualToString:@"toRecentDriveReview"]) {
             UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
-            nextViewController.driveDetailContainer = self.containerArray[selectedCellRow];
+            nextViewController.driveDetailContainer = [self.containerArray[selectedCellRow] driveDetailContainer];
         }
     }
     
