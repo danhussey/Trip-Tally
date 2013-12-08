@@ -163,6 +163,14 @@
     return self;
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"toDriveBinaryDetailView"]) {
+        UIViewController <DriveRecordDeveloper> *nextViewController = segue.destinationViewController;
+        nextViewController.driveDetailContainer = self.driveDetailContainer;
+    }
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

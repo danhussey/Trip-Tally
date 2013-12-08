@@ -17,14 +17,13 @@
         return nil;
     }
     self.driver = [aDecoder decodeObjectForKey:@"driver"];
-    self.supervisor = [aDecoder decodeObjectForKey:@"supervisor"];
+	self.supervisor = [aDecoder decodeObjectForKey:@"supervisor"];
     self.odometerStart = [aDecoder decodeObjectForKey:@"odometerStart"];
     self.odometerFinish = [aDecoder decodeObjectForKey:@"odometerFinish"];
     self.car = [aDecoder decodeObjectForKey:@"car"];
     self.driveCompletionBinaryDetails = [aDecoder decodeObjectForKey:@"driveCompletionBinaryDetails"];
     self.startDate = [aDecoder decodeObjectForKey:@"startDate"];
     self.endDate = [aDecoder decodeObjectForKey:@"endDate"];
-    
     self.elapsedTime = [aDecoder decodeObjectForKey:@"elapsedTime"];
     self.distanceTravelled = [aDecoder decodeIntegerForKey:@"distanceTravelled"];
     

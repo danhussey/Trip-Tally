@@ -113,7 +113,7 @@
     else if ([self isOdometerOrDriveCell]) {
         if (![self.detailField.text isEqualToString:@"Odometer"]) return YES;
     }
-    [self shakeView:self];
+    [self shakeView:self.detailField];
     return NO;
 }
 
@@ -240,6 +240,7 @@
         
         UINib *transitionNib = [UINib nibWithNibName:@"DriveDetailCell" bundle:nil];
         DriveDetailCell *transitionView = (DriveDetailCell*)[[transitionNib instantiateWithOwner:self options:nil] firstObject];
+		UITextField *transitionTextField = transitionView.detailField;
         
         
         switch (gestureRecognizer.direction) {
@@ -291,6 +292,17 @@
 
 #pragma mark - Text Field Editing Logic
 
+-(void)cancelNumberPad{
+    self.detailField.text = @"";
+    [self textFieldShouldReturn:self.detailField];
+    [self.detailField resignFirstResponder];
+}
+
+-(void)doneWithNumberPad{
+    [self textFieldShouldReturn:self.detailField];
+    [self.detailField resignFirstResponder];
+}
+
 - (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
     [self updateCellText];
     return YES;
@@ -317,7 +329,17 @@
         DriveDetailCell *carCell = (DriveDetailCell*)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         if ([carCell isInCustomDetailPosition]) {
             textField.clearsOnBeginEditing = YES;
+            UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+            numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+            numberToolbar.items = [NSArray arrayWithObjects:
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
+                                   nil];
+            [numberToolbar sizeToFit];
+            textField.inputAccessoryView = numberToolbar;
             textField.keyboardType = UIKeyboardTypeNumberPad;
+            
             return YES;
         }
         else return NO;
@@ -332,7 +354,7 @@
     self.deleteButtonShowing = NO;
     if ([self isInAddNewPosition]){
         if ([self hasDuplicateInDatabase:copyOfText] || [copyOfText isEqualToString:@""] ) {
-            [self shakeView:self];
+            [self shakeView:self.detailField];
             [self updateCellText];
             return NO;
         }
@@ -344,7 +366,7 @@
     }
     else if ([self isInCustomDetailPosition]) {
         if ([copyOfText isEqualToString:@""]) {
-            [self shakeView:self];
+            [self shakeView:self.detailField];
             [self updateCellText];
             return NO;
         }
@@ -352,7 +374,7 @@
             [[self.cellData objectAtIndex:wrappingCellPosition.cellPosition] setValue:copyOfText forKey:@"generalKey"];
         }
         else if ([self numberOfMatchesToString:copyOfText] > 0) {
-            [self shakeView:self];
+            [self shakeView:self.detailField];
             [self updateCellText];
             return NO;
         }
@@ -430,9 +452,8 @@
 {
     int hitCounter = 0;
     for (id element in self.cellData) {
-        if ([[self stringForManagedObject:element] isEqualToString:string]) hitCounter++;
+		 if ([string caseInsensitiveCompare:[self stringForManagedObject:element]] == NSOrderedSame) hitCounter++;
     }
-    
     if (hitCounter > 0) return YES;
     else return NO;
 }

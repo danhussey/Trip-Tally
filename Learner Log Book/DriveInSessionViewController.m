@@ -23,8 +23,7 @@
     NSTimeInterval startTime;
     NSTimeInterval elapsedTimeCache;
     NSTimeInterval elapsedTime;
-    bool running;
-    bool readyToRecordLocation; //Bool that allows the adding of a location to the locationsarray, set to true when the heading change is updated
+    bool running; 
     int hours, minutes, seconds;
 }
 
@@ -44,9 +43,9 @@
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.pausesLocationUpdatesAutomatically = NO; //Look into this
-        _locationManager.distanceFilter = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-       // _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
+        _locationManager.distanceFilter = 5; //metres
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
         _locationManager.delegate = self;
     }
     return _locationManager;
@@ -68,7 +67,7 @@
 
 - (IBAction)doFinishedButton:(UIButton *)sender {
     self.driveDetailContainer.distanceTravelled = [self distanceTravelledFromLocations:self.recordedLocationsArray];
-    int distanceInKilometres = (int)self.driveDetailContainer.distanceTravelled/1000;
+    int distanceInKilometres = self.driveDetailContainer.distanceTravelled/1000;
     self.driveDetailContainer.odometerFinish = [NSNumber numberWithInt:[self.driveDetailContainer.odometerStart intValue] + distanceInKilometres];
     self.driveDetailContainer.endDate = [NSDate date];
     //self.driveDetailContainer.elapsedTime = [self.driveDetailContainer.endDate timeIntervalSinceDate:self.driveDetailContainer.startDate];
@@ -238,9 +237,8 @@
         for (id element in locations) {
             CLLocation *location;
             if ([element isKindOfClass:[CLLocation class]]) location = element;
-            NSDate *currentTime = [NSDate date];
-            NSTimeInterval locationThreshhold = (60*5); //60 seconds (a minutes) times 30
-            if ([currentTime timeIntervalSinceDate:location.timestamp] <= locationThreshhold && location.horizontalAccuracy < kRequiredHorizontalAccuracy) {
+			
+            if (([location.timestamp compare:self.driveDetailContainer.startDate] == NSOrderedDescending || [location.timestamp compare:self.driveDetailContainer.startDate] == NSOrderedSame) && location.horizontalAccuracy < kRequiredHorizontalAccuracy) {
                 [self.recordedLocationsArray addObject:location];
                 //For each element in the locations array, if it's a location assign it to the location variable, and if its timestamp is less than 5 minutes old, add the location to the recorded locations array property
                 NSLog(@"%@", location.description);
