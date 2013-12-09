@@ -11,7 +11,7 @@
 @interface DriveBinaryDetailViewController ()
 
 {
-	NSDictionary *detailsDictionary;
+	NSMutableDictionary *detailsDictionary;
 	NSMutableArray *tickedDetails;
 	NSMutableArray *criteriaSectionKeys;
 }
@@ -40,7 +40,7 @@
 {
     if (indexPath.section < criteriaSectionKeys.count) {
         NSString *currentSectionKey = criteriaSectionKeys[indexPath.section];
-        NSArray *currentSectionArray = [self.criteriaDictionary objectForKey:currentSectionKey];
+        NSArray *currentSectionArray = [detailsDictionary objectForKey:currentSectionKey];
         NSMutableDictionary *currentCellDictionary = currentSectionArray[indexPath.row];
         return currentCellDictionary;
         
@@ -50,8 +50,15 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    
-    return [[self.criteriaDictionary objectForKey:@"sectionKeys"] objectAtIndex:section];
+    if ([self tableView:self.tableView numberOfRowsInSection:section] == 0) return nil;
+    else return [[self.criteriaDictionary objectForKey:@"sectionKeys"] objectAtIndex:section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	int rows = [[detailsDictionary objectForKey:criteriaSectionKeys[section]] count];
+    return rows;
+	
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -80,13 +87,19 @@
 	
 	while ((element = [enumerator nextObject])) {
 		if ([element isEqualToString:@"sectionKeys"]) continue;
-		NSArray *arrayForCurrentSection = [detailsDictionary valueForKey:element];
+		NSMutableArray *arrayForCurrentSection = [detailsDictionary valueForKey:element];
+		NSMutableArray *objectsToBeDeleted = [[NSMutableArray alloc] init];
 		for (id currentDictionary in arrayForCurrentSection) {
 			id value = [currentDictionary valueForKey:@"Value"];
-			if ([value isEqualToNumber:[NSNumber numberWithBool:YES]])
-				[tickedDetails addObject:[currentDictionary valueForKey:@"Title"]];
+			//if ([value isEqualToNumber:[NSNumber numberWithBool:YES]])
+				//[tickedDetails addObject:[currentDictionary valueForKey:@"Title"]];
+			if ([value isEqualToNumber:[NSNumber numberWithBool:NO]])
+				[objectsToBeDeleted addObject:currentDictionary];
 		}
+		[arrayForCurrentSection removeObjectsInArray:objectsToBeDeleted];
 	}
+	
+	
 	
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -108,13 +121,6 @@
     // Return the number of sections.
     int sections = criteriaSectionKeys.count;
     return (sections-1);
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	int rows = [[self.criteriaDictionary objectForKey:criteriaSectionKeys[section]] count];
-    return rows;
-	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

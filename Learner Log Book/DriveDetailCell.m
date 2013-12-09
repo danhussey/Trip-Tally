@@ -234,9 +234,11 @@
         NSLog(@"Before: %i", wrappingCellPosition.cellPosition);
         
         //Frame positions
-        CGRect originalContentViewFrame = self.contentView.frame;
-        CGRect leftOfOriginalContentViewFrame = CGRectMake(originalContentViewFrame.origin.x-320, originalContentViewFrame.origin.y, originalContentViewFrame.size.width, originalContentViewFrame.size.height);
-        CGRect rightOfOriginalContentViewFrame = CGRectMake(originalContentViewFrame.origin.x+320, originalContentViewFrame.origin.y, originalContentViewFrame.size.width, originalContentViewFrame.size.height);
+		
+		CGRect originalLabelFrame = self.detailField.frame;
+		CGRect leftOfOriginalTextField = CGRectMake(originalLabelFrame.origin.x-320, originalLabelFrame.origin.y, originalLabelFrame.size.width, originalLabelFrame.size.height);
+		CGRect rightOfOriginalTextField = CGRectMake(originalLabelFrame.origin.x+320, originalLabelFrame.origin.y, originalLabelFrame.size.width, originalLabelFrame.size.height);
+		
         
         UINib *transitionNib = [UINib nibWithNibName:@"DriveDetailCell" bundle:nil];
         DriveDetailCell *transitionView = (DriveDetailCell*)[[transitionNib instantiateWithOwner:self options:nil] firstObject];
@@ -248,7 +250,7 @@
             {
                 if (!deleteFlag)
                     [wrappingCellPosition incrementCellPosition];
-                transitionView.frame = rightOfOriginalContentViewFrame;
+                transitionTextField.frame = rightOfOriginalTextField;
             }
                 break;
                 
@@ -256,7 +258,7 @@
             {
                 if (!deleteFlag)
                     [wrappingCellPosition decrementCellPosition];
-                transitionView.frame = leftOfOriginalContentViewFrame;
+                transitionTextField.frame = leftOfOriginalTextField;
             }
                 break;
                 
@@ -264,23 +266,27 @@
                 break;
         }
         
-        transitionView.detailField.text = [self stringForManagedObject:[self.cellData objectAtIndex:wrappingCellPosition.cellPosition]];
-        [self.contentView addSubview:transitionView];
+        transitionTextField.text = [self stringForManagedObject:[self.cellData objectAtIndex:wrappingCellPosition.cellPosition]];
+        [self insertSubview:transitionTextField aboveSubview:self.detailField];
         
         [UIView animateWithDuration:0.15
                          animations:^{
-                             if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft)
-                                 self.contentView.frame = leftOfOriginalContentViewFrame;
-                             else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight)
-                                 self.contentView.frame = rightOfOriginalContentViewFrame;
+                             if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+								 self.detailField.frame = leftOfOriginalTextField;
+								 transitionTextField.frame = originalLabelFrame;
+							 }
+                             else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+								 self.detailField.frame = rightOfOriginalTextField;
+								 transitionTextField.frame = originalLabelFrame;
+							 }
                          }
          
                          completion:^(BOOL finished) {
                              if (finished) {
-                                 self.detailField.text = transitionView.detailField.text;
-                                 self.contentView.frame = originalContentViewFrame;
+                                 self.detailField.text = transitionTextField.text;
+                                 self.detailField.frame = originalLabelFrame;
                                  [self.detailField endEditing:YES];
-                                 [transitionView removeFromSuperview];
+                                 [transitionTextField removeFromSuperview];
                                  NSLog(@"After: %i", wrappingCellPosition.cellPosition);
                                  deleteFlag = NO;
                                  [self updateCellText];
