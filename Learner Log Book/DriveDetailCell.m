@@ -44,7 +44,7 @@
 {
     NSManagedObjectContext *managedObjectContext;
     WrappingCellPositionFactory *wrappingCellPosition;
-    BOOL deleteFlag; //Decides whther or not incrementing will happen upon swipe
+	bool deleteFlag;
     
 }
 
@@ -71,15 +71,6 @@
 {
     [super setSelected:NO animated:animated];
     // Configure the view for the selected state
-}
-
-- (void) awakeFromNib   //Cell type not yet set
-{
-    //Custom init goes here
-    managedObjectContext = [self managedObjectContext];
-    wrappingCellPosition = [[WrappingCellPositionFactory alloc] init];
-    self.detailField.delegate = self;
-    deleteFlag = NO;
 }
 
 #pragma mark - Cell Information Methods
@@ -119,7 +110,7 @@
 
 - (BOOL) isInAddNewPosition
 {
-    if (wrappingCellPosition.cellPosition == wrappingCellPosition.cellDataArrayCount-1) return YES;
+    if (wrappingCellPosition.cellPosition == wrappingCellPosition.cellDataArrayCount) return YES;
     else return NO;
 }
 #pragma mark - Updating Cell Text
@@ -160,7 +151,9 @@
     if (![self isOdometerOrDriveCell]) {
         NSString *cellEntityName = self.cellType;
         NSFetchRequest *cellDataRequest = [[NSFetchRequest alloc] initWithEntityName:cellEntityName];
-        NSMutableArray *cellDataFetchResults = [[managedObjectContext executeFetchRequest:cellDataRequest error:nil] mutableCopy];
+		NSError *error;
+        NSMutableArray *cellDataFetchResults = [[managedObjectContext executeFetchRequest:cellDataRequest error:&error] mutableCopy];
+		
         NSMutableArray *parsedCellDataArray = [self parsedCellDataArrayForCurrentCellType: cellDataFetchResults];
         
         //Updating the wrapping position keeper
@@ -547,6 +540,13 @@
         self.deleteButtonShowing = NO;
         [self deleteDetailFromStore:originalTextBeforeEditing];
     }
+}
+
+-(void)awakeFromNib
+{
+	managedObjectContext = [self managedObjectContext];
+	wrappingCellPosition = [[WrappingCellPositionFactory alloc] init];
+	deleteFlag = NO;
 }
 
 @end

@@ -138,6 +138,7 @@
         cell.cellType = [tableData objectAtIndex:indexPath.row];
         cell.tableView = self.tableView;
         if ([cell.cellType isEqualToString:@"Odometer"]) cell.detailField.text = cell.cellType;
+		[cell updateCellText];
     }
     return cell;
 }

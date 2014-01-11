@@ -149,8 +149,8 @@
 			children = (
 				484EE5CD1848B73F00C5EEFA /* DriveDetailCell.h */,
 				484EE5CE1848B73F00C5EEFA /* DriveDetailCell.m */,
-				48E89884184DD83F00D3AD5F /* DeleteButton.xib */,
 				484EE5CB1848B41400C5EEFA /* DriveDetailCell.xib */,
+				48E89884184DD83F00D3AD5F /* DeleteButton.xib */,
 				488A05441801650A00B3DA2E /* BinarySelectionCell.h */,
 				488A05451801650A00B3DA2E /* BinarySelectionCell.m */,
 				486BD5BC17F8521E00E38172 /* ExtendedCell.h */,
