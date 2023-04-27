@@ -1,1 +1,4 @@
-*.xcodeproj/
+# .gitignore
+
+# Ignore Xcode user-specific data
+*.xcuserdata/
